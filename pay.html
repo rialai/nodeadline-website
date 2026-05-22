@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nodeadline | Consulting Engagement — €3,650</title>
+    <meta
+      name="description"
+      content="A focused Nodeadline consulting engagement. One-time payment of €3,650."
+    />
+    <meta property="og:title" content="Nodeadline Consulting — €3,650" />
+    <meta
+      property="og:description"
+      content="A focused consulting engagement. One-time payment, real progress."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nodeadline.ie/pay.html" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="topbar">
+      <a class="brand" href="index.html" style="text-decoration: none; color: inherit;">NODEADLINE</a>
+      <a class="pill" href="mailto:hello@nodeadline.ie">Contact</a>
+    </header>
+
+    <main class="hero">
+      <div id="thanks" class="banner" role="status" hidden>
+        <strong>Payment received — thank you.</strong>
+        We'll be in touch at the email you used to pay. Check your inbox for a receipt.
+      </div>
+      <div id="cancelled" class="banner banner-muted" role="status" hidden>
+        Payment was cancelled. No charge was made — you can try again whenever you're ready.
+      </div>
+
+      <p class="kicker reveal">Consulting engagement</p>
+      <h1 class="title reveal delay-1">Focused work,<br />real progress.</h1>
+      <p class="subtitle reveal delay-2">
+        A fixed-scope Nodeadline consulting engagement. We align on goals, work in
+        a steady cadence, and ship outcomes — without performative crunch.
+      </p>
+
+      <section class="offer-grid reveal delay-3">
+        <article class="offer-card">
+          <h2>What's included</h2>
+          <ul class="includes">
+            <li>Kickoff and scoping session to define clear outcomes</li>
+            <li>Hands-on delivery across a fixed engagement window</li>
+            <li>Weekly progress check-ins and async updates</li>
+            <li>Handover with documentation and next steps</li>
+          </ul>
+        </article>
+
+        <aside class="pay-card" aria-label="Payment">
+          <p class="price-label">One-time payment</p>
+          <p class="price">
+            <span class="price-amount">€3,650</span>
+          </p>
+          <p class="price-note">Single payment. No subscription, no hidden fees.</p>
+
+          <!--
+            STRIPE SETUP:
+            1. In your Stripe Dashboard create a Payment Link for €3,650 (EUR), one-time.
+            2. Set its post-payment redirect to: https://nodeadline.ie/pay.html?paid=1
+            3. Paste the link below in place of REPLACE_WITH_STRIPE_PAYMENT_LINK.
+            Payouts land in your connected AIB business IBAN automatically.
+          -->
+          <a
+            id="payBtn"
+            class="cta primary pay-btn"
+            href="REPLACE_WITH_STRIPE_PAYMENT_LINK"
+            rel="noopener"
+          >
+            Pay €3,650 securely
+          </a>
+          <p class="secure-note">Card payment is processed securely by Stripe.</p>
+
+          <button
+            id="bankToggle"
+            class="link-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="bankDetails"
+          >
+            Prefer a bank transfer?
+          </button>
+
+          <div id="bankDetails" class="bank-details" hidden>
+            <p class="bank-intro">
+              Pay by SEPA bank transfer to our AIB business account. Please include
+              the reference so we can match your payment.
+            </p>
+            <dl class="bank-list">
+              <div class="bank-row">
+                <dt>Account name</dt>
+                <dd>
+                  <span data-copy>REPLACE_WITH_ACCOUNT_NAME</span>
+                  <button class="copy-btn" type="button" aria-label="Copy account name">Copy</button>
+                </dd>
+              </div>
+              <div class="bank-row">
+                <dt>IBAN</dt>
+                <dd>
+                  <span data-copy>REPLACE_WITH_IBAN</span>
+                  <button class="copy-btn" type="button" aria-label="Copy IBAN">Copy</button>
+                </dd>
+              </div>
+              <div class="bank-row">
+                <dt>BIC</dt>
+                <dd>
+                  <span data-copy>REPLACE_WITH_BIC</span>
+                  <button class="copy-btn" type="button" aria-label="Copy BIC">Copy</button>
+                </dd>
+              </div>
+              <div class="bank-row">
+                <dt>Amount</dt>
+                <dd><span data-copy>3650.00 EUR</span></dd>
+              </div>
+              <div class="bank-row">
+                <dt>Reference</dt>
+                <dd><span data-copy>Nodeadline consulting</span></dd>
+              </div>
+            </dl>
+            <p class="bank-note">
+              Need a formal invoice first? Email
+              <a href="mailto:hello@nodeadline.ie?subject=Invoice%20request%20%E2%80%94%20Consulting%20%E2%82%AC3%2C650">hello@nodeadline.ie</a>.
+            </p>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer reveal delay-5">
+      <p>© <span id="year"></span> Nodeadline. Dublin, Ireland.</p>
+    </footer>
+
+    <script src="pay.js"></script>
+  </body>
+</html>
