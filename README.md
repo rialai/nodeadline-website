@@ -5,9 +5,42 @@ Static GitHub Pages website for nodeadline.ie.
 ## Files
 
 - index.html
+- pay.html (consulting offer + payment landing page)
 - styles.css
 - script.js
+- pay.js
 - CNAME
+
+## Payment landing page (pay.html)
+
+A one-time €3,650 consulting offer. The site is fully static (GitHub Pages),
+so payment goes through hosted providers — no backend required. Two methods
+are wired up; fill in the placeholders for whichever you use.
+
+### Option A — Card payment via Stripe (recommended)
+
+1. Create a Stripe account and connect your **AIB business IBAN** for payouts.
+2. In the Stripe Dashboard, create a **Payment Link** for €3,650 (EUR),
+   one-time.
+3. Set the link's post-payment redirect to:
+   `https://nodeadline.ie/pay.html?paid=1`
+   (and, if you set a cancel URL, `https://nodeadline.ie/pay.html?cancelled=1`).
+4. In `pay.html`, replace `REPLACE_WITH_STRIPE_PAYMENT_LINK` (the `href` of
+   the `#payBtn` button) with your Payment Link URL.
+
+No secret or publishable keys live in this repo — a Payment Link is just a URL.
+Stripe shows a receipt and the buyer is redirected back to the thank-you banner.
+
+### Option B — SEPA bank transfer to AIB (zero card fees)
+
+In `pay.html`, replace these placeholders with your AIB details:
+
+- `REPLACE_WITH_ACCOUNT_NAME`
+- `REPLACE_WITH_IBAN`
+- `REPLACE_WITH_BIC`
+
+Buyers reveal these via the "Prefer a bank transfer?" toggle and pay manually.
+Reconciliation is manual — match incoming transfers by the reference shown.
 
 ## Deploy via GitHub Pages
 
