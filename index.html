@@ -22,14 +22,15 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="pay.css" />
   </head>
   <body>
     <header class="topbar wrap">
       <span class="brand">NODEADLINE</span>
       <nav class="nav">
         <a href="#stack">what we deploy</a>
-        <a href="pay.html">pricing</a>
-        <a href="mailto:hello@nodeadline.ie">contact</a>
+        <a href="#offer">costs</a>
+        <a href="mailto:nikolai@riabets.com">contact</a>
       </nav>
     </header>
 
@@ -41,18 +42,58 @@
         </h1>
         <p class="subtitle reveal d2">
           We walk onto your production site and stand up a complete enterprise
-          management system. Then the model takes over: reshaping screens,
-          reports and workflows on demand. <strong>No hourly billing,
-          experiment without limit.</strong>
+          management system. <strong>No hourly billing, experiment without limit.</strong>
         </p>
-        <div class="cta-row reveal d3">
-          <a class="btn primary" href="pay.html">Costs</a>
+      </section>
+
+      <section id="offer" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">01</span>
+          <h2 class="section-title">Costs</h2>
+        </div>
+        <p class="section-lead reveal">
+          <span class="tk-n">€3,650</span> upfront — that's <span class="tk-n">€10</span> a day for a full year of
+          work together. Over the same year, you only owe <span class="tk-n">1%</span> of the revenue we can
+          actually prove we moved, billed as it lands in your <span class="tk-ty">ERP</span>.
+        </p>
+
+        <div class="offer-grid reveal d1">
+          <article class="offer-card">
+            <h2>How it works</h2>
+            <ul class="includes">
+              <li><strong>€10 a day for a year</strong> — <span class="tk-n">€3,650</span> upfront buys <span class="tk-n">12</span> months of focused engagement</li>
+              <li><strong>Proof of work in your ERP</strong> — every euro of revenue we touch is tracked transparently</li>
+              <li><strong>1% of tracked turnover</strong> — billed across the same <span class="tk-n">12</span> months, only on revenue we can prove in your <span class="tk-ty">ERP</span></li>
+              <li><strong>Steady cadence</strong> — kickoff, weekly check-ins, async updates, no performative crunch</li>
+              <li><strong>Clean handover</strong> — documentation and next steps when we wrap</li>
+            </ul>
+          </article>
+
+          <aside class="pay-card" aria-label="Payment">
+            <p class="price-label">12-month access</p>
+            <p class="price">
+              <span class="price-amount">€3,650</span>
+            </p>
+            <p class="price-note">
+              That's <strong>€10 a day</strong> for a year.
+              Plus <span class="tk-n">1%</span> of revenue we measurably move over the same <span class="tk-n">12</span> months,
+              tracked in your <span class="tk-ty">ERP</span>.
+            </p>
+            <a
+              class="btn primary pay-btn"
+              href="https://buy.stripe.com/9B6fZh1I13b34391AwejK01"
+              rel="noopener"
+            >
+              Pay €3,650 securely
+            </a>
+            <p class="secure-note">Card payment is processed securely by Stripe.</p>
+          </aside>
         </div>
       </section>
 
       <section id="stack" class="section wrap">
         <div class="section-head reveal">
-          <span class="section-num">01</span>
+          <span class="section-num">02</span>
           <h2 class="section-title">Everything it runs</h2>
         </div>
         <p class="section-lead reveal">
@@ -121,14 +162,14 @@
           <p class="deal-line">
             Contributors set their own commission — all the way down.
           </p>
-          <a class="deal-cta" href="pay.html">→ Manage your commission</a>
+          <a class="deal-cta" href="#offer">→ Manage your commission</a>
         </div>
       </section>
     </main>
 
     <footer class="footer wrap">
       <span>© <span id="year"></span> Nodeadline. Dublin, Ireland.</span>
-      <a href="mailto:hello@nodeadline.ie">hello@nodeadline.ie</a>
+      <a href="mailto:nikolai@riabets.com">nikolai@riabets.com</a>
     </footer>
 
     <script src="script.js"></script>

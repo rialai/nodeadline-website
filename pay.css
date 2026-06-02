@@ -1,4 +1,5 @@
-/* Payment page — extends the home.css design system (white, monospace) */
+/* Payment / offer components — extends the home.css design system (white, monospace).
+   Shared by index.html (inline offer block) and pay.html. */
 
 .pay-hero {
   padding: 7vh 0 1vh;
@@ -23,7 +24,7 @@
 }
 
 .offer-grid {
-  margin-top: 3vh;
+  margin-top: 2vh;
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 1.6rem;
@@ -40,7 +41,6 @@
 
 .offer-card h2::before {
   content: "// ";
-  color: var(--muted);
 }
 
 .includes {
@@ -119,98 +119,6 @@
   margin: 0.75rem 0 0;
   font-size: 0.74rem;
   color: var(--muted);
-}
-
-.link-toggle {
-  margin-top: 1.5rem;
-  padding: 0 0 2px;
-  border: 0;
-  border-bottom: 1px solid var(--ink);
-  background: none;
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  color: var(--ink);
-  cursor: pointer;
-  transition: opacity 140ms ease;
-}
-
-.link-toggle:hover {
-  opacity: 0.6;
-}
-
-.bank-details {
-  margin-top: 1.4rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid var(--line);
-}
-
-.bank-intro {
-  margin: 0 0 1.1rem;
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-.bank-list {
-  margin: 0;
-}
-
-.bank-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 0.8rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.bank-row:last-child {
-  border-bottom: 0;
-}
-
-.bank-row dt {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-}
-
-.bank-row dd {
-  margin: 0;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-align: right;
-  font-size: 0.8rem;
-  word-break: break-all;
-}
-
-.copy-btn {
-  flex: none;
-  border: 1px solid var(--line-strong);
-  background: var(--bg);
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  padding: 0.16rem 0.5rem;
-  cursor: pointer;
-  transition: background 140ms ease, color 140ms ease;
-}
-
-.copy-btn:hover,
-.copy-btn.copied {
-  background: var(--ink);
-  color: var(--bg);
-}
-
-.bank-note {
-  margin: 1.1rem 0 0;
-  font-size: 0.76rem;
-  line-height: 1.55;
-  color: var(--muted);
-}
-
-.bank-note a {
-  color: var(--ink);
 }
 
 @media (max-width: 720px) {
