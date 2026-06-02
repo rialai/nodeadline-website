@@ -52,9 +52,9 @@
           <h2 class="section-title">Costs</h2>
         </div>
         <p class="section-lead reveal">
-          <span class="tk-n">€3,650</span> upfront — that's <span class="tk-n">€10</span> a day for a full year of
-          work together. Over the same year, you only owe <span class="tk-n">1%</span> of the revenue we can
-          actually prove we moved, billed as it lands in your <span class="tk-ty">ERP</span>.
+          Set your commission below. The more you put in upfront, the less of the
+          turnover we can prove in your <span class="tk-ty">ERP</span> we keep — from
+          <span class="tk-n">100%</span> all the way down to <span class="tk-n">1%</span>.
         </p>
 
         <div class="offer-grid reveal d1">
@@ -70,23 +70,27 @@
           </article>
 
           <aside class="pay-card" aria-label="Payment">
-            <p class="price-label">12-month access</p>
-            <p class="price">
-              <span class="price-amount">€3,650</span>
-            </p>
-            <p class="price-note">
-              That's <strong>€10 a day</strong> for a year.
-              Plus <span class="tk-n">1%</span> of revenue we measurably move over the same <span class="tk-n">12</span> months,
-              tracked in your <span class="tk-ty">ERP</span>.
+            <p class="price-label">Set your commission</p>
+            <div class="comm-opts" role="group" aria-label="Commission level">
+              <button type="button" class="comm-opt" data-comm="100" aria-pressed="false">100%</button>
+              <button type="button" class="comm-opt" data-comm="10" aria-pressed="false">10%</button>
+              <button type="button" class="comm-opt is-active" data-comm="1" aria-pressed="true">1%</button>
+            </div>
+            <p class="price"><span class="price-amount" data-amount>1%</span></p>
+            <p class="price-note" data-note>
+              <strong>€3,650</strong> upfront — <span class="tk-n">€10</span> a day for a year.
+              We then take just <span class="tk-n">1%</span> of the revenue we can prove over the
+              same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.
             </p>
             <a
               class="btn primary pay-btn"
+              data-pay
               href="https://buy.stripe.com/9B6fZh1I13b34391AwejK01"
               rel="noopener"
             >
               Pay €3,650 securely
             </a>
-            <p class="secure-note">Card payment is processed securely by Stripe.</p>
+            <p class="secure-note" data-secure>Card payment is processed securely by Stripe.</p>
           </aside>
         </div>
       </section>

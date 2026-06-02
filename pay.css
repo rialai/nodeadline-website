@@ -86,6 +86,39 @@
   color: var(--tk-cm);
 }
 
+/* commission switcher (segmented control) */
+.comm-opts {
+  display: flex;
+  width: fit-content;
+  margin: 0.7rem 0 1rem;
+  border: 1px solid var(--line-strong);
+}
+
+.comm-opt {
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  padding: 0.42rem 0.85rem;
+  background: var(--bg);
+  color: var(--ink);
+  border: 0;
+  border-right: 1px solid var(--line-strong);
+  cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+}
+
+.comm-opt:last-child {
+  border-right: 0;
+}
+
+.comm-opt:hover {
+  background: #f2f2f2;
+}
+
+.comm-opt.is-active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
 .price {
   margin: 0.45rem 0 0;
 }
