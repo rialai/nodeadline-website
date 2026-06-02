@@ -3,8 +3,9 @@ if (year) {
   year.textContent = String(new Date().getFullYear());
 }
 
-// Liquid-glass commission swipe bar: tap a segment or drag the thumb across it.
-// Each tier updates the slots line, price note and Stripe link.
+// Liquid-glass commission swipe bar: tap a segment or grab + drag the thumb
+// across it (mouse, touch and pen via Pointer Events). Each tier updates the
+// slots line, price note and Stripe link.
 const glass = document.querySelector(".comm-glass");
 if (glass) {
   const thumb = glass.querySelector(".thumb");
@@ -14,6 +15,7 @@ if (glass) {
   const note = document.querySelector("[data-note]");
   const pay = document.querySelector("[data-pay]");
   const secure = document.querySelector("[data-secure]");
+  const last = segs.length - 1;
 
   const TIERS = {
     "100": {
@@ -49,14 +51,18 @@ if (glass) {
     thumb.style.transform = "translateX(" + i * 100 + "%)";
   }
 
+  // apply() is the single source of truth: it always re-syncs the thumb to the
+  // active tier, so thumb + selection can never drift apart.
   function apply(comm) {
     const t = TIERS[comm];
     if (!t) return;
-    segs.forEach((s) => {
-      const active = s.dataset.comm === comm;
+    const idx = segs.findIndex((s) => s.dataset.comm === comm);
+    segs.forEach((s, k) => {
+      const active = k === idx;
       s.classList.toggle("is-active", active);
       s.setAttribute("aria-selected", String(active));
     });
+    if (idx >= 0) thumbTo(idx);
     if (amount) amount.textContent = t.amount;
     if (slots) slots.innerHTML = t.slots;
     if (note) note.innerHTML = t.note;
@@ -72,31 +78,36 @@ if (glass) {
     if (secure) secure.hidden = !t.secure;
   }
 
-  // tap / keyboard select
-  segs.forEach((s, i) => {
-    s.addEventListener("click", () => {
-      thumbTo(i);
-      apply(s.dataset.comm);
-    });
-  });
+  function segWidth() {
+    return thumb.getBoundingClientRect().width;
+  }
+  function pxFromClientX(clientX) {
+    const rect = glass.getBoundingClientRect();
+    const w = segWidth();
+    const x = clientX - rect.left - 4 - w / 2; // 4px = track padding
+    return Math.max(0, Math.min(w * last, x));
+  }
+  function idxFromClientX(clientX) {
+    const w = segWidth();
+    const i = Math.round(pxFromClientX(clientX) / w);
+    return Math.max(0, Math.min(last, i));
+  }
 
-  // drag / swipe select
   let dragging = false;
   let moved = false;
   let startX = 0;
-  let segW = 0;
-  let lastX = 0;
+  let suppressClick = false;
 
   glass.addEventListener("pointerdown", (e) => {
-    segW = thumb.getBoundingClientRect().width;
-    startX = e.clientX;
-    moved = false;
     dragging = true;
+    moved = false;
+    startX = e.clientX;
     try {
       glass.setPointerCapture(e.pointerId);
     } catch (err) {
       /* ignore */
     }
+    e.preventDefault();
   });
 
   glass.addEventListener("pointermove", (e) => {
@@ -104,28 +115,39 @@ if (glass) {
     if (Math.abs(e.clientX - startX) > 4) moved = true;
     if (!moved) return;
     glass.classList.add("dragging");
-    const rect = glass.getBoundingClientRect();
-    let x = e.clientX - rect.left - 4 - segW / 2;
-    x = Math.max(0, Math.min(segW * 2, x));
-    thumb.style.transform = "translateX(" + x + "px)";
-    lastX = x;
+    thumb.style.transform = "translateX(" + pxFromClientX(e.clientX) + "px)";
   });
 
-  glass.addEventListener("pointerup", () => {
+  function endPointer(e) {
     if (!dragging) return;
     dragging = false;
     glass.classList.remove("dragging");
-    if (moved) {
-      const i = Math.max(0, Math.min(2, Math.round(lastX / segW)));
-      thumbTo(i);
-      apply(segs[i].dataset.comm);
-    }
-    // a plain tap is handled by the segment click listener
+    apply(segs[idxFromClientX(e.clientX)].dataset.comm);
+    // a pointer interaction already selected; swallow the trailing click so it
+    // can't re-select a different segment.
+    suppressClick = true;
+    setTimeout(() => {
+      suppressClick = false;
+    }, 60);
+  }
+
+  glass.addEventListener("pointerup", endPointer);
+  glass.addEventListener("pointercancel", () => {
+    dragging = false;
+    moved = false;
+    glass.classList.remove("dragging");
+  });
+
+  // keyboard / fallback: Enter or Space on a focused segment
+  segs.forEach((s) => {
+    s.addEventListener("click", () => {
+      if (suppressClick) return;
+      apply(s.dataset.comm);
+    });
   });
 
   // init to the default-active segment (1%)
-  let initIdx = segs.findIndex((s) => s.classList.contains("is-active"));
-  if (initIdx < 0) initIdx = 0;
-  thumbTo(initIdx);
-  apply(segs[initIdx].dataset.comm);
+  const initSeg =
+    segs.find((s) => s.classList.contains("is-active")) || segs[last];
+  apply(initSeg.dataset.comm);
 }

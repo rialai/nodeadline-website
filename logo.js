@@ -4,7 +4,7 @@
   const els = document.querySelectorAll(".brand.matrix");
   if (!els.length) return;
 
-  const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*<>/=+";
+  const GLYPHS = "abcdefghijklmnopqrstuvwxyz0123456789@#$%&*<>/=+";
   const reduce =
     window.matchMedia &&
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -14,10 +14,12 @@
     el.setAttribute("aria-label", target);
     el.textContent = "";
 
-    const spans = Array.prototype.map.call(target, (ch) => {
+    const dot = target.lastIndexOf("."); // ".ie" gets its own colour
+    const spans = Array.prototype.map.call(target, (ch, i) => {
       const s = document.createElement("span");
       s.textContent = ch;
       s.dataset.final = ch;
+      if (dot >= 0 && i >= dot) s.classList.add("tld");
       s.setAttribute("aria-hidden", "true");
       el.appendChild(s);
       return s;

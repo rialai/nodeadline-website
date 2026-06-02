@@ -87,10 +87,11 @@ a {
   font-size: 0.82rem;
 }
 
-/* Matrix-style animated logo (green on white) */
+/* Animated wordmark: "nodeadline" red, ".ie" green, glyph-scramble on white */
 .brand.matrix {
-  color: #00a000;
-  text-shadow: 0 0 6px rgba(0, 180, 40, 0.3);
+  color: #cf222e;
+  text-transform: lowercase;
+  text-shadow: 0 0 6px rgba(207, 34, 46, 0.28);
 }
 
 .brand.matrix span {
@@ -99,7 +100,17 @@ a {
   text-align: center;
 }
 
+.brand.matrix span.tld {
+  color: #00a000;
+  text-shadow: 0 0 6px rgba(0, 180, 40, 0.3);
+}
+
 .brand.matrix span.on {
+  color: #ff3b30;
+  text-shadow: 0 0 9px rgba(255, 59, 48, 0.55);
+}
+
+.brand.matrix span.tld.on {
   color: #00ff41;
   text-shadow: 0 0 9px rgba(0, 255, 65, 0.55);
 }
