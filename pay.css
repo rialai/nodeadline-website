@@ -220,6 +220,10 @@
   text-align: center;
 }
 
+.pay-btn[hidden] {
+  display: none;
+}
+
 .secure-note {
   margin: 0.75rem 0 0;
   font-size: 0.74rem;

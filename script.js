@@ -23,16 +23,16 @@ if (glass) {
       slots: '<span class="tk-k">Sold out</span> — no slots left at 100%.',
       note:
         'Pay nothing upfront — we keep <span class="tk-n">100%</span> of the turnover we can track. The price of not contributing. We expect to take <span class="tk-n">10%</span> of the <span class="tk-n">€3,650</span> we track in your first few days.',
-      pay: null,
-      href: null,
+      pay: "Email us about 100%",
+      href: "mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20100%25%20commission",
       secure: false,
     },
     "10": {
       amount: "10%",
       slots: 'Only <span class="tk-n">1</span> slot left at 10%.',
       note:
-        'Name your contribution at checkout. We then take <span class="tk-n">10%</span> of the revenue we can prove over the year, tracked in your <span class="tk-ty">ERP</span>.',
-      pay: "Contribute & lock in 10%",
+        '<strong>€365</strong> upfront — <span class="tk-n">€1</span> a day for a year. We then take <span class="tk-n">10%</span> of the revenue we can prove over the same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.',
+      pay: "Pay €365 securely",
       href: "https://donate.stripe.com/5kQeVdeuNdPH1V10wsejK00",
       secure: true,
     },

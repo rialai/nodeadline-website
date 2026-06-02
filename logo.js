@@ -25,10 +25,13 @@
       return s;
     });
 
-    if (reduce) return; // keep it static for reduced-motion users
+    // only the ".ie" domain zone animates; "nodeadline" stays static red
+    const tld = spans.filter((s) => s.classList.contains("tld"));
+
+    if (reduce || !tld.length) return; // static for reduced-motion / no TLD
 
     function scramble() {
-      spans.forEach((s, i) => {
+      tld.forEach((s, i) => {
         const final = s.dataset.final;
         const frames = 5 + i * 2 + Math.floor(Math.random() * 5);
         let f = 0;
