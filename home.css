@@ -429,6 +429,14 @@ h2, li, button { animation-duration: 0.16s; }
   transform: translateY(0);
 }
 
+/* keep tip-bearing text blocks above following siblings so the bubble
+   isn't overlapped by the module grid / other section content */
+.title,
+.section-lead {
+  position: relative;
+  z-index: 20;
+}
+
 @media (max-width: 860px) {
   .stack {
     grid-template-columns: repeat(2, minmax(0, 1fr));
