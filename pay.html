@@ -18,36 +18,41 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Sora:wght@600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="pay.css" />
   </head>
   <body>
-    <div class="noise" aria-hidden="true"></div>
-    <header class="topbar">
+    <header class="topbar wrap">
       <a class="brand" href="index.html" style="text-decoration: none; color: inherit;">NODEADLINE</a>
-      <a class="pill" href="mailto:hello@nodeadline.ie">Contact</a>
+      <nav class="nav">
+        <a href="index.html">home</a>
+        <a href="mailto:hello@nodeadline.ie">contact</a>
+      </nav>
     </header>
 
-    <main class="hero">
-      <div id="thanks" class="banner" role="status" hidden>
-        <strong>Payment received — thank you.</strong>
-        We'll be in touch at the email you used to pay. Check your inbox for a receipt.
-      </div>
-      <div id="cancelled" class="banner banner-muted" role="status" hidden>
-        Payment was cancelled. No charge was made — you can try again whenever you're ready.
-      </div>
+    <main class="wrap">
+      <section class="pay-hero">
+        <div id="thanks" class="banner" role="status" hidden>
+          <strong>Payment received — thank you.</strong>
+          We'll be in touch at the email you used to pay. Check your inbox for a receipt.
+        </div>
+        <div id="cancelled" class="banner banner-muted" role="status" hidden>
+          Payment was cancelled. No charge was made — you can try again whenever you're ready.
+        </div>
 
-      <p class="kicker reveal">Outcome-based consulting</p>
-      <h1 class="title reveal delay-1">€10 a day.<br />1% of proof.</h1>
-      <p class="subtitle reveal delay-2">
-        €3,650 upfront — that's €10 a day for a full year of work together.
-        Over the same year, you only owe 1% of the revenue we can actually
-        prove we moved, billed as it lands in your ERP.
-      </p>
+        <p class="kicker reveal">outcome-based consulting</p>
+        <h1 class="title reveal d1">€10 a day. <em>1% of proof.</em></h1>
+        <p class="subtitle reveal d2">
+          €3,650 upfront — that's €10 a day for a full year of work together.
+          Over the same year, you only owe 1% of the revenue we can actually
+          prove we moved, billed as it lands in your ERP.
+        </p>
+      </section>
 
-      <section class="offer-grid reveal delay-3">
+      <section class="offer-grid reveal d3">
         <article class="offer-card">
           <h2>How it works</h2>
           <ul class="includes">
@@ -71,15 +76,14 @@
           </p>
 
           <!--
-            STRIPE SETUP:
-            1. In your Stripe Dashboard create a Payment Link for €3,650 (EUR), one-time.
-            2. Set its post-payment redirect to: https://nodeadline.ie/pay.html?paid=1
-            3. Paste the link below in place of REPLACE_WITH_STRIPE_PAYMENT_LINK.
-            Payouts land in your connected AIB business IBAN automatically.
+            Stripe Payment Link is live below.
+            Reminder: in the Stripe Dashboard set this link's post-payment
+            redirect to https://nodeadline.ie/pay.html?paid=1 so the
+            "Payment received" banner shows. Payouts land in the AIB IBAN.
           -->
           <a
             id="payBtn"
-            class="cta primary pay-btn"
+            class="btn primary pay-btn"
             href="https://buy.stripe.com/9B6fZh1I13b34391AwejK01"
             rel="noopener"
           >
@@ -142,8 +146,9 @@
       </section>
     </main>
 
-    <footer class="footer reveal delay-5">
-      <p>© <span id="year"></span> Nodeadline. Dublin, Ireland.</p>
+    <footer class="footer wrap">
+      <span>© <span id="year"></span> Nodeadline. Dublin, Ireland.</span>
+      <a href="index.html">nodeadline.ie</a>
     </footer>
 
     <script src="pay.js"></script>
