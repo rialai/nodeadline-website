@@ -20,7 +20,7 @@ if (glass) {
       amount: "100%",
       slots: '<span class="tk-k">Sold out</span> — no slots left at 100%.',
       note:
-        'Pay nothing upfront and we keep <span class="tk-n">100%</span> of the turnover we can track — but every 100% slot is taken.',
+        'Pay nothing upfront — we keep <span class="tk-n">100%</span> of the turnover we can track. The price of not contributing. We expect to take <span class="tk-n">10%</span> of the <span class="tk-n">€3,650</span> we track in your first few days.',
       pay: null,
       href: null,
       secure: false,
