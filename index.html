@@ -21,8 +21,8 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="home.css?v=2" />
-    <link rel="stylesheet" href="pay.css?v=2" />
+    <link rel="stylesheet" href="home.css?v=3" />
+    <link rel="stylesheet" href="pay.css?v=3" />
   </head>
   <body>
     <header class="topbar wrap">
@@ -71,12 +71,20 @@
 
           <aside class="pay-card" aria-label="Payment">
             <p class="price-label">Set your commission</p>
-            <div class="comm-opts" role="group" aria-label="Commission level">
-              <button type="button" class="comm-opt" data-comm="100" aria-pressed="false">100%</button>
-              <button type="button" class="comm-opt" data-comm="10" aria-pressed="false">10%</button>
-              <button type="button" class="comm-opt is-active" data-comm="1" aria-pressed="true">1%</button>
+            <div class="comm-glass" role="tablist" aria-label="Commission level">
+              <span class="thumb" aria-hidden="true"></span>
+              <button type="button" class="comm-seg sold-out" data-comm="100" role="tab" aria-selected="false">
+                <span class="seg-pct">100%</span><span class="seg-slots">sold out</span>
+              </button>
+              <button type="button" class="comm-seg" data-comm="10" role="tab" aria-selected="false">
+                <span class="seg-pct">10%</span><span class="seg-slots">1 slot</span>
+              </button>
+              <button type="button" class="comm-seg is-active" data-comm="1" role="tab" aria-selected="true">
+                <span class="seg-pct">1%</span><span class="seg-slots">10 slots</span>
+              </button>
             </div>
             <p class="price"><span class="price-amount" data-amount>1%</span></p>
+            <p class="slots" data-slots><span class="tk-n">10</span> slots available at 1%.</p>
             <p class="price-note" data-note>
               <strong>€3,650</strong> upfront — <span class="tk-n">€10</span> a day for a year.
               We then take just <span class="tk-n">1%</span> of the revenue we can prove over the
@@ -176,7 +184,7 @@
       <a href="mailto:nikolai@riabets.com">nikolai@riabets.com</a>
     </footer>
 
-    <script src="logo.js?v=2"></script>
-    <script src="script.js?v=2"></script>
+    <script src="logo.js?v=3"></script>
+    <script src="script.js?v=3"></script>
   </body>
 </html>
