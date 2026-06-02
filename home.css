@@ -87,6 +87,23 @@ a {
   font-size: 0.82rem;
 }
 
+/* Matrix-style animated logo (green on white) */
+.brand.matrix {
+  color: #00a000;
+  text-shadow: 0 0 6px rgba(0, 180, 40, 0.3);
+}
+
+.brand.matrix span {
+  display: inline-block;
+  width: 1ch;
+  text-align: center;
+}
+
+.brand.matrix span.on {
+  color: #00ff41;
+  text-shadow: 0 0 9px rgba(0, 255, 65, 0.55);
+}
+
 .nav {
   display: flex;
   gap: 1.4rem;
