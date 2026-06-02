@@ -348,7 +348,6 @@ a {
 /* ---- reveal ---- */
 .reveal {
   opacity: 0;
-  transform: translateY(10px);
   animation: rise 560ms ease forwards;
 }
 
@@ -360,8 +359,74 @@ a {
 @keyframes rise {
   to {
     opacity: 1;
-    transform: translateY(0);
   }
+}
+
+@keyframes tremble {
+  from { transform: translate(-0.2px, 0.15px); }
+  to { transform: translate(0.2px, -0.15px); }
+}
+
+/* barely-perceptible tremor on every text element */
+h1, h2, h3, p, li, a, button,
+.brand, .section-num, .footer span {
+  animation: tremble 0.19s ease-in-out infinite alternate;
+}
+
+p, a { animation-duration: 0.23s; }
+h2, li, button { animation-duration: 0.16s; }
+
+/* reveal text fades in AND keeps the tremor */
+.kicker, .title, .subtitle, .section-lead {
+  animation: rise 560ms ease forwards,
+    tremble 0.21s ease-in-out infinite alternate;
+}
+
+/* inline info tooltip — hover on desktop, tap/focus on touch */
+.tip {
+  position: relative;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+  outline: none;
+}
+
+.tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  width: max-content;
+  max-width: min(320px, 78vw);
+  white-space: normal;
+  text-align: left;
+  text-decoration: none;
+  letter-spacing: 0;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.72rem;
+  line-height: 1.5;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-3px);
+  transition: opacity 150ms ease, transform 150ms ease;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.tip:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tip:focus::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 @media (max-width: 860px) {
@@ -380,9 +445,12 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
   .reveal {
-    animation: none;
-    opacity: 1;
-    transform: none;
+    opacity: 1 !important;
   }
 }
