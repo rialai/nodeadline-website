@@ -7,6 +7,22 @@
   --accent: #0a0a0a;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
     Consolas, "Liberation Mono", monospace;
+
+  /* syntax-highlight palette (light editor theme) */
+  --tk-cm: #1a7f37; /* comment   */
+  --tk-k: #cf222e;  /* keyword   */
+  --tk-n: #0550ae;  /* number    */
+  --tk-ty: #1b7c83; /* type/id   */
+  --tk-s: #8250df;  /* string    */
+  --tk-op: #bc4c00; /* operator  */
+
+  /* brighter variants for the dark panel */
+  --tk-cm-d: #7ee787;
+  --tk-k-d: #ff7b72;
+  --tk-n-d: #79c0ff;
+  --tk-ty-d: #56d4dd;
+  --tk-s-d: #d2a8ff;
+  --tk-op-d: #ffa657;
 }
 
 * {
@@ -31,6 +47,21 @@ body {
 a {
   color: inherit;
 }
+
+/* syntax tokens */
+.tk-cm { color: var(--tk-cm); }
+.tk-k  { color: var(--tk-k); }
+.tk-n  { color: var(--tk-n); }
+.tk-ty { color: var(--tk-ty); }
+.tk-s  { color: var(--tk-s); }
+.tk-op { color: var(--tk-op); }
+
+.deal .tk-cm { color: var(--tk-cm-d); }
+.deal .tk-k  { color: var(--tk-k-d); }
+.deal .tk-n  { color: var(--tk-n-d); }
+.deal .tk-ty { color: var(--tk-ty-d); }
+.deal .tk-s  { color: var(--tk-s-d); }
+.deal .tk-op { color: var(--tk-op-d); }
 
 .wrap {
   width: min(1040px, 92vw);
@@ -76,7 +107,7 @@ a {
 .kicker {
   margin: 0 0 1.4rem;
   font-size: 0.8rem;
-  color: var(--muted);
+  color: var(--tk-cm);
 }
 
 .kicker::before {
@@ -94,9 +125,7 @@ a {
 
 .title em {
   font-style: normal;
-  background: var(--ink);
-  color: var(--bg);
-  padding: 0 0.18em;
+  color: var(--tk-k);
 }
 
 .subtitle {
@@ -107,8 +136,8 @@ a {
 }
 
 .subtitle strong {
-  color: var(--ink);
-  font-weight: 500;
+  color: var(--tk-k);
+  font-weight: 700;
 }
 
 .cta-row {
@@ -162,7 +191,7 @@ a {
 
 .section-num {
   font-size: 0.78rem;
-  color: var(--muted);
+  color: var(--tk-n);
 }
 
 .section-title {
@@ -197,11 +226,12 @@ a {
   margin: 0 0 0.55rem;
   font-size: 0.92rem;
   font-weight: 700;
+  color: var(--tk-ty);
 }
 
 .mod h3::before {
   content: "› ";
-  color: var(--muted);
+  color: var(--tk-op);
 }
 
 .mod p {
@@ -224,7 +254,11 @@ a {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #9a9a9a;
+  color: var(--tk-cm-d);
+}
+
+.deal h2::before {
+  content: "// ";
 }
 
 .deal-line {
@@ -247,8 +281,8 @@ a {
   margin-top: 1.6rem;
   font-size: 0.9rem;
   text-decoration: none;
-  color: var(--bg);
-  border-bottom: 1px solid var(--bg);
+  color: var(--tk-op-d);
+  border-bottom: 1px solid var(--tk-op-d);
   padding-bottom: 2px;
   transition: opacity 140ms ease;
 }
@@ -271,12 +305,12 @@ a {
 }
 
 .footer a {
-  color: var(--muted);
+  color: var(--tk-s);
   text-decoration: none;
 }
 
 .footer a:hover {
-  color: var(--ink);
+  text-decoration: underline;
 }
 
 /* ---- reveal ---- */

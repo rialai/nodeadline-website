@@ -35,6 +35,7 @@
   margin: 0 0 1.2rem;
   font-size: 0.98rem;
   font-weight: 700;
+  color: var(--tk-cm);
 }
 
 .offer-card h2::before {
@@ -62,11 +63,11 @@
   content: "›";
   position: absolute;
   left: 0;
-  color: var(--ink);
+  color: var(--tk-op);
 }
 
 .includes strong {
-  color: var(--ink);
+  color: var(--tk-ty);
   font-weight: 700;
 }
 
@@ -82,7 +83,7 @@
   font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--tk-cm);
 }
 
 .price {
@@ -93,6 +94,7 @@
   font-size: clamp(2.2rem, 6vw, 2.9rem);
   font-weight: 700;
   line-height: 1;
+  color: var(--tk-n);
 }
 
 .price-note {
@@ -103,8 +105,8 @@
 }
 
 .price-note strong {
-  color: var(--ink);
-  font-weight: 500;
+  color: var(--tk-n);
+  font-weight: 700;
 }
 
 .pay-btn {
