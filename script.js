@@ -17,6 +17,10 @@ if (glass) {
   const secure = document.querySelector("[data-secure]");
   const last = segs.length - 1;
 
+  // GATED 2026-06: live Stripe links replaced with "request access" mailto
+  // until Terms / refund are published (TZ §12). Restore: 10% href
+  // https://donate.stripe.com/5kQeVdeuNdPH1V10wsejK00 ; 1% href
+  // https://buy.stripe.com/9B6fZh1I13b34391AwejK01 ; set secure:true back.
   const TIERS = {
     "100": {
       amount: "100%",
@@ -32,18 +36,18 @@ if (glass) {
       slots: 'Only <span class="tk-n">1</span> slot left at 10%.',
       note:
         '<strong>€365</strong> upfront — <span class="tk-n">€1</span> a day for a year. We then take <span class="tk-n">10%</span> of the revenue we can prove over the same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.',
-      pay: "Pay €365 securely",
-      href: "https://donate.stripe.com/5kQeVdeuNdPH1V10wsejK00",
-      secure: true,
+      pay: "Start at €365 — request access",
+      href: "mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%20365%20(10%25)",
+      secure: false,
     },
     "1": {
       amount: "1%",
       slots: '<span class="tk-n">10</span> slots available at 1%.',
       note:
         '<strong>€3,650</strong> upfront — <span class="tk-n">€10</span> a day for a year. We then take just <span class="tk-n">1%</span> of the revenue we can prove over the same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.',
-      pay: "Pay €3,650 securely",
-      href: "https://buy.stripe.com/9B6fZh1I13b34391AwejK01",
-      secure: true,
+      pay: "Start at €3,650 — request access",
+      href: "mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%203650%20(1%25)",
+      secure: false,
     },
   };
 

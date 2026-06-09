@@ -76,20 +76,24 @@
           </p>
 
           <!--
-            Stripe Payment Link is live below.
-            Reminder: in the Stripe Dashboard set this link's post-payment
-            redirect to https://nodeadline.ie/pay.html?paid=1 so the
-            "Payment received" banner shows. Payouts land in the AIB IBAN.
+            GATED 2026-06: live Stripe checkout temporarily disabled until
+            legally-reviewed Terms / offer / refund policy are published
+            (see TZ §12). The CTA below routes to a "request access" mailto so
+            buy-intent still reaches us and we set the client up directly.
+            To restore Stripe: put back href
+            https://buy.stripe.com/9B6fZh1I13b34391AwejK01 , un-hide the
+            secure-note, and re-set the Stripe dashboard redirect to
+            https://nodeadline.ie/pay.html?paid=1 (payouts to the AIB IBAN).
           -->
           <a
             id="payBtn"
             class="btn primary pay-btn"
-            href="https://buy.stripe.com/9B6fZh1I13b34391AwejK01"
+            href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%203650%20(1%25)"
             rel="noopener"
           >
-            Pay €3,650 securely
+            Start at €3,650 — request access
           </a>
-          <p class="secure-note">Card payment is processed securely by Stripe.</p>
+          <p class="secure-note" hidden>Card payment is processed securely by Stripe.</p>
         </aside>
       </section>
     </main>
