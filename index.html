@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nodeadline | We deploy your ERP, then let AI rewrite it</title>
+    <title>Nodeadline | See your whole business on one page</title>
     <meta
       name="description"
-      content="We walk onto your production floor, stand up a full ERP, and rebuild it with a neural network. Every operation digitized, endlessly reshaped — no hourly billing."
+      content="Stop running your business from your head. We map how it actually works — drawn for you in 12 clicks — then run it on a real system. Nothing is built or billed until you say 'that's my business.' Start from €1/day."
     />
-    <meta property="og:title" content="Nodeadline — AI-rebuilt ERP for the factory floor" />
+    <meta property="og:title" content="Nodeadline — see your whole business on one page" />
     <meta
       property="og:description"
-      content="A full enterprise system, deployed on your floor and continuously rewritten by a neural network. Experiment without limit, no hourly billing."
+      content="We map how your business actually works, then run it on a real system. Nothing is built or billed until you confirm the map. The map is yours to keep."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nodeadline.ie" />
@@ -21,97 +21,162 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="home.css?v=8" />
-    <link rel="stylesheet" href="pay.css?v=8" />
+    <link rel="stylesheet" href="home.css?v=9" />
+    <link rel="stylesheet" href="pay.css?v=9" />
   </head>
   <body>
     <header class="topbar wrap">
       <span class="brand matrix">nodeadline.ie</span>
       <nav class="nav">
-        <a href="#stack">what we deploy</a>
+        <a href="#map">the map</a>
+        <a href="#stack">what we run</a>
         <a href="#offer">costs</a>
-        <a href="mailto:nikolai@riabets.com">contact</a>
+        <a href="#start">start</a>
       </nav>
     </header>
 
     <main>
+      <!-- ===== Hero (rewrite §3.1) — concrete result + zero risk ===== -->
       <section class="hero wrap">
-        <p class="kicker reveal">corporate systems for small &amp; micro business, with an AI operator · Dublin</p>
+        <p class="kicker reveal">for owners of small &amp; micro businesses · Dublin, Ireland</p>
         <h1 class="title reveal d1">
-          We deploy a full <span class="tk-ty tip" tabindex="0" aria-label="ERP — what it is" data-tip="ERP — enterprise resource planning: one connected system that runs your whole back office (accounting, sales, stock, manufacturing, HR and more).">ERP</span> on your floor — then <em>rewire it</em> with a neural network.
+          See your whole business on one page — <em>drawn for you</em> in 12 clicks.
         </h1>
         <p class="subtitle reveal d2">
-          We walk onto your production site and stand up a complete enterprise
-          management system. <strong>No hourly billing, experiment without limit.</strong>
+          Stop running it from your head. We map how your business actually works,
+          then run it on a real system. <strong>Start from €1/day.</strong>
         </p>
+        <p class="safety-banner reveal d3">
+          Risk-free: nothing is built or billed until you look at the map and say
+          <span class="tk-s">“that's my business.”</span> Walk away anytime — the map is yours to keep.
+        </p>
+        <div class="cta-row reveal d4">
+          <a class="btn primary" href="#map">Draw my business — 12 clicks, no email needed</a>
+          <a class="btn ghost" href="#example">See an example map</a>
+        </div>
       </section>
 
-      <section id="offer" class="section wrap">
+      <!-- ===== In 30 seconds (§5.2) — one click for those who won't read ===== -->
+      <section class="thirty wrap reveal">
+        <div class="thirty-cell">
+          <span class="thirty-tag">the pain</span>
+          <p>Everything important lives in your head — and it's getting heavier.</p>
+        </div>
+        <div class="thirty-cell thirty-map" aria-hidden="true">
+          <span class="thirty-tag">the map</span>
+          <div class="mini-map">
+            <span class="mm-node">people</span>
+            <span class="mm-node">stock</span>
+            <span class="mm-node mm-hi">suppliers</span>
+            <span class="mm-node">money</span>
+            <span class="mm-node">jobs</span>
+          </div>
+        </div>
+        <div class="thirty-cell">
+          <span class="thirty-tag">the price</span>
+          <p>Start from <span class="tk-n">€1/day</span>. We only bill on turnover we can prove in your <span class="tk-ty">ERP</span>.</p>
+        </div>
+      </section>
+
+      <!-- ===== The problem (§3.2 + shift §3.3) ===== -->
+      <section id="problem" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">01</span>
-          <h2 class="section-title">Costs</h2>
+          <h2 class="section-title">The problem</h2>
         </div>
-        <p class="section-lead reveal">
-          Set your commission below. The more you put in upfront, the less of the
-          turnover we can prove in your <span class="tk-ty">ERP</span> we keep — from
-          <span class="tk-n">100%</span> all the way down to <span class="tk-n">1%</span>.
+        <ul class="problem-list reveal d1">
+          <li>You pay for a website / ads / a developer — and you're not sure why.</li>
+          <li>Everything important lives in your head.</li>
+          <li>Every agency wants a “brief”. You shouldn't have to write one.</li>
+        </ul>
+        <p class="shift reveal d2">
+          The reason it feels off when someone pitches you:
+          <strong>nobody ever shows you the whole thing on one picture.</strong>
         </p>
-
-        <div class="offer-grid reveal d1">
-          <article class="offer-card">
-            <h2>How it works</h2>
-            <ul class="includes">
-              <li><strong>€10 a day for a year</strong> — <span class="tk-n">€3,650</span> upfront buys <span class="tk-n">12</span> months of focused engagement</li>
-              <li><strong>Proof of work in your ERP</strong> — every euro of revenue we touch is tracked transparently</li>
-              <li><strong>1% of tracked turnover</strong> — billed across the same <span class="tk-n">12</span> months, only on revenue we can prove in your <span class="tk-ty">ERP</span></li>
-              <li><strong>Steady cadence</strong> — kickoff, weekly check-ins, async updates, no performative crunch</li>
-              <li><strong>Clean handover</strong> — documentation and next steps when we wrap</li>
-            </ul>
-          </article>
-
-          <aside class="pay-card" aria-label="Payment">
-            <p class="price-label">Set your commission</p>
-            <div class="comm-glass" role="tablist" aria-label="Commission level">
-              <span class="thumb" aria-hidden="true"></span>
-              <button type="button" class="comm-seg sold-out" data-comm="100" role="tab" aria-selected="false">
-                <span class="seg-pct">100%</span><span class="seg-slots">sold out</span>
-              </button>
-              <button type="button" class="comm-seg" data-comm="10" role="tab" aria-selected="false">
-                <span class="seg-pct">10%</span><span class="seg-slots">1 slot</span>
-              </button>
-              <button type="button" class="comm-seg is-active" data-comm="1" role="tab" aria-selected="true">
-                <span class="seg-pct">1%</span><span class="seg-slots">10 slots</span>
-              </button>
-            </div>
-            <p class="price"><span class="price-amount" data-amount>1%</span></p>
-            <p class="slots" data-slots><span class="tk-n">10</span> slots available at 1%.</p>
-            <p class="price-note" data-note>
-              <strong>€3,650</strong> upfront — <span class="tk-n">€10</span> a day for a year.
-              We then take just <span class="tk-n">1%</span> of the revenue we can prove over the
-              same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.
-            </p>
-            <a
-              class="btn primary pay-btn"
-              data-pay
-              href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%203650%20(1%25)"
-              rel="noopener"
-            >
-              Start at €3,650 — request access
-            </a>
-            <p class="secure-note" data-secure hidden>Card payment is processed securely by Stripe.</p>
-          </aside>
-        </div>
       </section>
 
-      <section id="stack" class="section wrap">
+      <!-- ===== The map / quiz (§6 — flagship). Engine mounts into #quiz-mount ===== -->
+      <section id="map" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">02</span>
+          <h2 class="section-title">A map of how your business actually works</h2>
+        </div>
+        <p class="section-lead reveal">
+          Like a wiring diagram, but for your whole operation — people, materials,
+          tools, money, the lot. Answer 12 quick taps and we draw the first version
+          for you. <strong>No email needed to see it.</strong>
+        </p>
+
+        <div id="quiz-mount" class="quiz-mount reveal d1" data-quiz-placeholder>
+          <div class="quiz-ph">
+            <span class="quiz-ph-tag">// interactive builder</span>
+            <p class="quiz-ph-lead">12 taps → your business, drawn on one page.</p>
+            <a class="btn primary" href="#start">Draw my business</a>
+            <p class="quiz-ph-note">Mouse or thumb only — about 90 seconds. We never ask who you are until you've seen the map.</p>
+          </div>
+        </div>
+
+        <p class="navigator reveal d2">
+          Then you get alerts, not anxiety — like a sat-nav:
+          <span class="tk-s">“this is coming up… it happened… handled.”</span>
+        </p>
+      </section>
+
+      <!-- ===== Example map (§5.4) — café template (interactive next) ===== -->
+      <section id="example" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">03</span>
+          <h2 class="section-title">Example: a café</h2>
+        </div>
+        <div class="example-map reveal d1" aria-label="Example map of a café business">
+          <div class="mini-map mini-map--lg">
+            <span class="mm-node">owner</span>
+            <span class="mm-node">staff</span>
+            <span class="mm-node">ingredients</span>
+            <span class="mm-node mm-hi">suppliers</span>
+            <span class="mm-node">kitchen</span>
+            <span class="mm-node">counter</span>
+            <span class="mm-node">customers</span>
+            <span class="mm-node">cash &amp; card</span>
+          </div>
+        </div>
+        <p class="example-disclaimer reveal d2">
+          This is a generic template for a <span class="tk-ty">café</span>. Your real
+          business looks different — <strong>that's the whole point.</strong>
+          <a href="#map">Want yours?</a>
+        </p>
+      </section>
+
+      <!-- ===== How it works (§5.5 — honest about timing) ===== -->
+      <section id="how" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">04</span>
+          <h2 class="section-title">How it works</h2>
+        </div>
+        <ol class="steps reveal d1">
+          <li><span class="step-n">1</span><span class="step-t"><strong>Instant draft</strong> — now, from the quiz.</span></li>
+          <li><span class="step-n">2</span><span class="step-t"><strong>Your real map</strong> — drawn with you within a week.</span></li>
+          <li><span class="step-n">3</span><span class="step-t"><strong>You confirm it's right.</strong></span></li>
+          <li><span class="step-n">4</span><span class="step-t">Then we stand up your <span class="tk-ty">ERP</span> and let AI keep reshaping it — <strong>no hourly billing.</strong></span></li>
+        </ol>
+        <p class="safety-block reveal d2">
+          Your insurance: we don't build anything or take a cut until you've
+          confirmed the map matches reality. <strong>Free in, free out</strong> — and
+          the map is yours to keep either way.
+        </p>
+      </section>
+
+      <!-- ===== Everything it runs / ERP (KEEP — moved BEFORE Costs per §4) ===== -->
+      <section id="stack" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">05</span>
           <h2 class="section-title">Everything it runs</h2>
         </div>
         <p class="section-lead reveal">
-          We ship <span class="tk-ty tip" tabindex="0" aria-label="ERPNext — what it is" data-tip="ERPNext is an open-source ERP — enterprise resource planning. One connected system that runs a company's accounting, sales, stock, manufacturing, projects, HR and more, instead of a pile of separate tools.">ERPNext</span> live across your entire operation. Every function
-          below becomes digital — and ours to reshape endlessly, at no extra
-          charge.
+          Under the map is a real engine. We ship
+          <span class="tk-ty tip" tabindex="0" aria-label="ERPNext — what it is" data-tip="ERPNext is an open-source ERP — enterprise resource planning. One connected system that runs a company's accounting, sales, stock, manufacturing, projects, HR and more, instead of a pile of separate tools.">ERPNext</span>
+          live across your entire operation. Every function below becomes digital —
+          and ours to reshape endlessly, at no extra charge.
         </p>
 
         <div class="stack reveal d1">
@@ -166,15 +231,152 @@
         </div>
       </section>
 
+      <!-- ===== Costs / commission slider + gated checkout (KEEP — now AFTER ERP) ===== -->
+      <section id="offer" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">06</span>
+          <h2 class="section-title">Costs</h2>
+        </div>
+        <p class="section-lead reveal">
+          Set your commission below. The more you put in upfront, the less of the
+          turnover we can prove in your <span class="tk-ty">ERP</span> we keep — from
+          <span class="tk-n">100%</span> all the way down to <span class="tk-n">1%</span>.
+        </p>
+
+        <div class="offer-grid reveal d1">
+          <article class="offer-card">
+            <h2>What you get</h2>
+            <ul class="includes">
+              <li><strong>€10 a day for a year</strong> — <span class="tk-n">€3,650</span> upfront buys <span class="tk-n">12</span> months of focused engagement</li>
+              <li><strong>Proof of work in your ERP</strong> — every euro of revenue we touch is tracked transparently</li>
+              <li><strong>1% of tracked turnover</strong> — billed across the same <span class="tk-n">12</span> months, only on revenue we can prove in your <span class="tk-ty">ERP</span></li>
+              <li><strong>Steady cadence</strong> — kickoff, weekly check-ins, async updates, no performative crunch</li>
+              <li><strong>Clean handover</strong> — documentation and next steps when we wrap</li>
+            </ul>
+          </article>
+
+          <aside class="pay-card" aria-label="Payment">
+            <p class="price-label">Set your commission</p>
+            <div class="comm-glass" role="tablist" aria-label="Commission level">
+              <span class="thumb" aria-hidden="true"></span>
+              <button type="button" class="comm-seg sold-out" data-comm="100" role="tab" aria-selected="false">
+                <span class="seg-pct">100%</span><span class="seg-slots">sold out</span>
+              </button>
+              <button type="button" class="comm-seg" data-comm="10" role="tab" aria-selected="false">
+                <span class="seg-pct">10%</span><span class="seg-slots">1 slot</span>
+              </button>
+              <button type="button" class="comm-seg is-active" data-comm="1" role="tab" aria-selected="true">
+                <span class="seg-pct">1%</span><span class="seg-slots">10 slots</span>
+              </button>
+            </div>
+            <p class="price"><span class="price-amount" data-amount>1%</span></p>
+            <p class="slots" data-slots><span class="tk-n">10</span> slots available at 1%.</p>
+            <p class="price-note" data-note>
+              <strong>€3,650</strong> upfront — <span class="tk-n">€10</span> a day for a year.
+              We then take just <span class="tk-n">1%</span> of the revenue we can prove over the
+              same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.
+            </p>
+            <a
+              class="btn primary pay-btn"
+              data-pay
+              href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%203650%20(1%25)"
+              rel="noopener"
+            >
+              Start at €3,650 — request access
+            </a>
+            <p class="secure-note" data-secure hidden>Card payment is processed securely by Stripe.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ===== How we get paid (softened per §9 — honest ladder, no aggression) ===== -->
       <section class="section wrap">
         <div class="deal reveal">
           <h2>How we get paid</h2>
-          <p class="deal-line big">By default, we take <span class="tk-n">100%</span> of the turnover we can track.</p>
-          <p class="deal-line muted">That's the price of not contributing.</p>
+          <p class="deal-line big">The more you put in, the less we take.</p>
           <p class="deal-line">
-            Contributors set their own commission — all the way down.
+            <span class="tk-n">€1</span>/day → <span class="tk-n">10%</span>;
+            <span class="tk-n">€10</span>/day → <span class="tk-n">1%</span>;
+            <span class="tk-n">€100</span>/day → <span class="tk-n">~0%</span>.
           </p>
-          <a class="deal-cta" href="#offer">→ Manage your commission</a>
+          <p class="deal-line muted">
+            We only ever bill on turnover we can prove in your <span class="tk-ty">ERP</span>.
+          </p>
+          <p class="deal-line free-tier">
+            <strong>Free tier:</strong> pay nothing up front. We then take a share only
+            of the new turnover we can actually prove. No new money — no fee, ever.
+          </p>
+          <a class="deal-cta" href="#offer">→ Set your commission</a>
+        </div>
+      </section>
+
+      <!-- ===== The environment / network teaser (§3a) ===== -->
+      <section id="network" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">07</span>
+          <h2 class="section-title">You're not on your own</h2>
+        </div>
+        <p class="network-copy reveal d1">
+          You don't just get a map. You join a network where we actively look for ways
+          to connect you with other members — <strong>cheaper supply, shared resources,
+          new demand.</strong> The more members, the more hidden wins.
+        </p>
+      </section>
+
+      <!-- ===== FAQ / objections (§10) ===== -->
+      <section id="faq" class="section wrap">
+        <div class="section-head reveal">
+          <span class="section-num">08</span>
+          <h2 class="section-title">Straight answers</h2>
+        </div>
+        <div class="faq reveal d1">
+          <details>
+            <summary>Why did you call me?</summary>
+            <p>Honest: your number is public (Google Maps). No tricks — we only call businesses that look like a fit.</p>
+          </details>
+          <details>
+            <summary>What's the catch with the free tier?</summary>
+            <p>No catch. If we make you €0 extra, you pay €0. We win only when you win.</p>
+          </details>
+          <details>
+            <summary>Isn't this just a CRM?</summary>
+            <p>A CRM stores what you already know. We draw what's never been written down — the whole system — then run it.</p>
+          </details>
+          <details>
+            <summary>I don't have time to write a brief.</summary>
+            <p>12 clicks, or one call. We draw the first version for you.</p>
+          </details>
+          <details>
+            <summary>What if I stop?</summary>
+            <p>Free in, free out. The map is yours to keep.</p>
+          </details>
+          <details>
+            <summary>How do you measure “results”?</summary>
+            <p>We agree a baseline together before anything changes; you pay a share only of the measurable difference above it, tracked in your ERP — and you see the math.</p>
+          </details>
+          <details>
+            <summary>Who are you?</summary>
+            <p>A small team in Dublin that has spent years finding where businesses quietly leak time and money. No call centre — you talk to us directly.</p>
+          </details>
+          <details>
+            <summary>Is my data safe?</summary>
+            <p>Your data stays yours. We use EU-based tools, name our data controller in the privacy notice, and never sell anything.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ===== Start / direct CTA (§5.7 — "сразу продаём": straight to the ask) ===== -->
+      <section id="start" class="section wrap">
+        <div class="start-block reveal">
+          <h2>Ready? Start at <span class="tk-n">€1/day</span>.</h2>
+          <p>
+            Nothing is built or billed until you've seen your map and said it's right.
+            We set you up directly while we finalise our terms.
+          </p>
+          <div class="cta-row">
+            <a class="btn primary" href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%20365%20(10%25)">Start — request access</a>
+            <a class="btn ghost" href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Book%20a%2020-min%20call">Book a 20-min call</a>
+          </div>
         </div>
       </section>
     </main>
