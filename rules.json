@@ -1,0 +1,140 @@
+{
+  "_note": "Declarative map generation (TZ §6.2/§6.3). Engine: pick skeleton by biz_type (else _generic), apply rules whose `when` matches the answers, enforce invariants (8–15 nodes, >=1 highlight). Node types: people|materials|tools|money|documents|external. Edge kinds: flow|transaction. OWNER: skeletons exist for cafe + auto + generic (§14 'at least 2 types'); production/trades/services/retail currently use _generic — extendable here.",
+
+  "skeletons": {
+    "cafe": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Runs the place", "Buys, hires, fixes"] },
+        { "id": "staff", "type": "people", "label": "Staff", "functions": ["Cook, serve, clean"] },
+        { "id": "suppliers", "type": "external", "label": "Suppliers", "functions": ["Deliver ingredients"] },
+        { "id": "ingredients", "type": "materials", "label": "Ingredients", "functions": ["Food & drink stock"] },
+        { "id": "kitchen", "type": "tools", "label": "Kitchen", "functions": ["Prep & cook"] },
+        { "id": "counter", "type": "tools", "label": "Counter / POS", "functions": ["Take orders & payment"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Order, eat, pay"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "orders" },
+        { "source": "suppliers", "target": "ingredients", "kind": "transaction", "label": "delivers" },
+        { "source": "ingredients", "target": "kitchen", "kind": "flow", "label": "prep" },
+        { "source": "kitchen", "target": "counter", "kind": "flow", "label": "serve" },
+        { "source": "staff", "target": "kitchen", "kind": "flow", "label": "cook" },
+        { "source": "staff", "target": "counter", "kind": "flow", "label": "serve" },
+        { "source": "counter", "target": "customers", "kind": "flow", "label": "hand over" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "staff", "kind": "flow", "label": "manage" }
+      ]
+    },
+
+    "auto": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Runs the shop", "Quotes, orders, hires"] },
+        { "id": "mechanics", "type": "people", "label": "Mechanics", "functions": ["Do the work"] },
+        { "id": "suppliers", "type": "external", "label": "Parts suppliers", "functions": ["Supply parts"] },
+        { "id": "parts", "type": "materials", "label": "Parts", "functions": ["Stock for jobs"] },
+        { "id": "bay", "type": "tools", "label": "Workshop bay", "functions": ["Lifts, tools, diagnostics"] },
+        { "id": "jobs", "type": "documents", "label": "Job cards", "functions": ["What to do, for whom"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Book, collect, pay"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "customers", "target": "jobs", "kind": "flow", "label": "book" },
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "order parts" },
+        { "source": "suppliers", "target": "parts", "kind": "transaction", "label": "deliver" },
+        { "source": "parts", "target": "jobs", "kind": "flow", "label": "used on" },
+        { "source": "jobs", "target": "bay", "kind": "flow", "label": "scheduled" },
+        { "source": "mechanics", "target": "bay", "kind": "flow", "label": "work" },
+        { "source": "bay", "target": "customers", "kind": "flow", "label": "car ready" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "mechanics", "kind": "flow", "label": "manage" }
+      ]
+    },
+
+    "_generic": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Runs it", "Buys, sells, hires"] },
+        { "id": "team", "type": "people", "label": "Team", "functions": ["Do the work"] },
+        { "id": "suppliers", "type": "external", "label": "Suppliers", "functions": ["Supply inputs"] },
+        { "id": "inputs", "type": "materials", "label": "Inputs", "functions": ["Materials / stock"] },
+        { "id": "work", "type": "tools", "label": "The work", "functions": ["Where value is made"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Buy, pay"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "order" },
+        { "source": "suppliers", "target": "inputs", "kind": "transaction", "label": "deliver" },
+        { "source": "inputs", "target": "work", "kind": "flow", "label": "used in" },
+        { "source": "team", "target": "work", "kind": "flow", "label": "do" },
+        { "source": "work", "target": "customers", "kind": "flow", "label": "deliver" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "team", "kind": "flow", "label": "manage" }
+      ]
+    }
+  },
+
+  "rules": [
+    { "when": { "resources": "vehicles" },
+      "addNode": { "id": "vehicles", "type": "tools", "label": "Vehicles", "functions": ["Deliver / collect"] },
+      "addEdges": [ { "to_hub": ["jobs", "work", "counter", "customers"], "from": "vehicles", "kind": "flow", "label": "deliver" } ] },
+
+    { "when": { "resources": "premises" },
+      "addNode": { "id": "premises", "type": "tools", "label": "Premises", "functions": ["Where it happens"] },
+      "addEdges": [ { "from_hub": ["owner"], "to": "premises", "kind": "flow", "label": "rent / run" } ] },
+
+    { "when": { "resources": "software" },
+      "addNode": { "id": "software", "type": "documents", "label": "Software", "functions": ["Records & admin", "Usually scattered"] },
+      "addEdges": [ { "from_hub": ["owner"], "to": "software", "kind": "flow", "label": "records" } ] },
+
+    { "when": { "cafe_delivery": "yes" },
+      "addNode": { "id": "delivery", "type": "external", "label": "Delivery apps", "functions": ["Online orders", "Take a cut"] },
+      "addEdges": [ { "from": "counter", "to": "delivery", "kind": "transaction", "label": "orders" }, { "from": "delivery", "to": "money", "kind": "transaction", "label": "payout" } ] },
+
+    { "when": { "retail_channel": "online" },
+      "addNode": { "id": "online", "type": "external", "label": "Online shop", "functions": ["Sell beyond the door"] },
+      "addEdges": [ { "from": "online", "to": "money", "kind": "transaction", "label": "sales" }, { "from_hub": ["inputs", "work"], "to": "online", "kind": "flow", "label": "ship" } ] },
+
+    { "when": { "pain": "suppliers" }, "highlightNode": "suppliers",
+      "hint": { "node": "suppliers", "type": "automate", "text": "Auto-compare supplier prices — buy the cheapest, every time." } },
+
+    { "when": { "pain": "staff" }, "highlightNode": ["staff", "mechanics", "team"],
+      "hint": { "node": ["staff", "mechanics", "team"], "type": "save", "text": "Spare-staff cover with task cards when someone's out." } },
+
+    { "when": { "pain": "cashflow" }, "highlightNode": "money",
+      "hint": { "node": "money", "type": "automate", "text": "See cash in and out before it bites." } },
+
+    { "when": { "pain": "time" }, "highlightNode": "owner",
+      "hint": { "node": "owner", "type": "save", "text": "Take the daily admin off your plate." } },
+
+    { "when": { "pain": "chaos" }, "highlightNode": "owner",
+      "hint": { "node": "owner", "type": "automate", "text": "One clear picture instead of ten chats." } }
+  ],
+
+  "defaultHighlight": "suppliers",
+
+  "examples": {
+    "cafe": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Runs the place", "Buys, hires, fixes"] },
+        { "id": "staff", "type": "people", "label": "Staff", "functions": ["Cook, serve, clean"] },
+        { "id": "suppliers", "type": "external", "label": "Suppliers", "functions": ["Deliver ingredients"] },
+        { "id": "ingredients", "type": "materials", "label": "Ingredients", "functions": ["Food & drink stock"] },
+        { "id": "kitchen", "type": "tools", "label": "Kitchen", "functions": ["Prep & cook"] },
+        { "id": "counter", "type": "tools", "label": "Counter / POS", "functions": ["Take orders & payment"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Order, eat, pay"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "orders", "highlight": true },
+        { "source": "suppliers", "target": "ingredients", "kind": "transaction", "label": "delivers", "highlight": true },
+        { "source": "ingredients", "target": "kitchen", "kind": "flow", "label": "prep" },
+        { "source": "kitchen", "target": "counter", "kind": "flow", "label": "serve" },
+        { "source": "staff", "target": "kitchen", "kind": "flow", "label": "cook" },
+        { "source": "staff", "target": "counter", "kind": "flow", "label": "serve" },
+        { "source": "counter", "target": "customers", "kind": "flow", "label": "hand over" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "staff", "kind": "flow", "label": "manage" }
+      ],
+      "highlightNode": "suppliers"
+    }
+  }
+}

@@ -722,3 +722,95 @@ h2, li, button { animation-duration: 0.16s; }
   .thirty-cell { border-right: 0; border-bottom: 1px solid var(--line); }
   .thirty-cell:last-child { border-bottom: 0; }
 }
+
+/* ============================================================
+   Quiz -> mini-map flagship (§6)
+   ============================================================ */
+
+/* the live quiz replaces the dashed placeholder box */
+.quiz-mount.quiz-live {
+  display: block;
+  text-align: left;
+  background: none;
+  border: 1px solid var(--line);
+  padding: clamp(1.2rem, 3vw, 1.8rem);
+  min-height: 0;
+}
+
+.quiz-head { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 1.3rem; }
+.quiz-step { font-size: 0.7rem; color: var(--tk-cm); white-space: nowrap; }
+.quiz-step::before { content: "// "; }
+.quiz-bar { flex: 1; height: 2px; background: var(--line); position: relative; }
+.quiz-bar-fill {
+  position: absolute; left: 0; top: 0; height: 100%;
+  background: var(--ink); transition: width 200ms ease;
+}
+
+.quiz-q { margin: 0 0 0.3rem; font-size: clamp(1.1rem, 2.6vw, 1.5rem); font-weight: 700; }
+.quiz-sub { margin: 0 0 1.1rem; font-size: 0.8rem; color: var(--muted); }
+
+.quiz-opts { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+.quiz-opt {
+  font-family: var(--mono); font-size: 0.86rem; cursor: pointer;
+  padding: 0.6rem 1rem; border: 1px solid var(--line-strong);
+  background: var(--bg); color: var(--ink);
+  transition: background 120ms ease, color 120ms ease;
+}
+.quiz-opt:hover { background: var(--line); }
+.quiz-opt.on { background: var(--ink); color: var(--bg); }
+
+.quiz-nav { display: flex; align-items: center; margin-top: 1.6rem; gap: 0.8rem; }
+.quiz-back {
+  font-family: var(--mono); font-size: 0.8rem; background: none; border: 0;
+  color: var(--muted); cursor: pointer; padding: 0.4rem 0;
+}
+.quiz-back:hover { color: var(--ink); }
+.quiz-next { margin-left: auto; cursor: pointer; }
+
+/* result */
+.quiz-done-tag { margin: 0 0 0.8rem; font-size: 0.72rem; color: var(--tk-cm); letter-spacing: 0.05em; }
+/* map is full-width; the inspect panel appears below on tap (no reserved column) */
+.quiz-stage,
+.cy-stage { display: block; }
+
+.cy-canvas {
+  min-height: 420px; height: 460px; width: 100%;
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.025) 1px, transparent 1px) 0 0 / 22px 22px,
+    linear-gradient(90deg, rgba(0, 0, 0, 0.025) 1px, transparent 1px) 0 0 / 22px 22px,
+    var(--bg);
+  position: relative; overflow: hidden;
+}
+#cy-example { height: 360px; min-height: 360px; }
+.cy-fallback-chips { padding: 1.4rem; }
+.cy-fallback { padding: 2rem 1.4rem; font-size: 0.82rem; color: var(--muted); text-align: center; }
+
+.cy-side {
+  margin-top: 0.8rem; border: 1px solid var(--line); padding: 1rem 1.2rem;
+  font-size: 0.8rem; background: #fafafa;
+}
+.cy-side .sp-type { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.cy-side h4 { margin: 0.3rem 0 0.7rem; font-size: 0.95rem; }
+.sp-fn { margin: 0 0 0.8rem; padding-left: 1rem; }
+.sp-fn li { font-size: 0.76rem; color: var(--muted); }
+.sp-h { margin: 0.6rem 0 0.2rem; font-size: 0.66rem; text-transform: uppercase; color: var(--tk-n); letter-spacing: 0.06em; }
+.sp-edges { list-style: none; margin: 0; padding: 0; }
+.sp-edges li { font-size: 0.76rem; margin-bottom: 0.2rem; }
+.sp-lbl { color: var(--tk-cm); }
+.sp-hint { margin: 0.9rem 0 0; padding-top: 0.7rem; border-top: 1px solid var(--line); font-size: 0.78rem; }
+.sp-hint-tag {
+  display: inline-block; margin-right: 0.4rem; font-size: 0.62rem;
+  text-transform: uppercase; color: var(--tk-op);
+  border: 1px solid var(--tk-op); padding: 0 0.3rem; border-radius: 3px;
+}
+
+.cy-tip { margin: 0.9rem 0 0; font-size: 0.76rem; color: var(--muted); }
+.cy-win { margin: 0.9rem 0 0; font-size: 0.86rem; }
+.cy-win-tag {
+  display: inline-block; margin-right: 0.5rem; font-size: 0.64rem;
+  text-transform: uppercase; color: var(--tk-k);
+  border: 1px solid var(--tk-k); padding: 0.05rem 0.35rem; border-radius: 3px;
+}
+.quiz-actions { margin-top: 1.4rem; }
+.sp-empty { margin: 0; color: var(--muted); font-size: 0.8rem; }

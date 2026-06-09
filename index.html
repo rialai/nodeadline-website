@@ -21,7 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="home.css?v=9" />
+    <link rel="stylesheet" href="home.css?v=10" />
     <link rel="stylesheet" href="pay.css?v=9" />
   </head>
   <body>
@@ -129,15 +129,20 @@
           <h2 class="section-title">Example: a café</h2>
         </div>
         <div class="example-map reveal d1" aria-label="Example map of a café business">
-          <div class="mini-map mini-map--lg">
-            <span class="mm-node">owner</span>
-            <span class="mm-node">staff</span>
-            <span class="mm-node">ingredients</span>
-            <span class="mm-node mm-hi">suppliers</span>
-            <span class="mm-node">kitchen</span>
-            <span class="mm-node">counter</span>
-            <span class="mm-node">customers</span>
-            <span class="mm-node">cash &amp; card</span>
+          <div class="cy-stage">
+            <div id="cy-example" class="cy-canvas">
+              <div class="mini-map mini-map--lg cy-fallback-chips">
+                <span class="mm-node">owner</span>
+                <span class="mm-node">staff</span>
+                <span class="mm-node">ingredients</span>
+                <span class="mm-node mm-hi">suppliers</span>
+                <span class="mm-node">kitchen</span>
+                <span class="mm-node">counter</span>
+                <span class="mm-node">customers</span>
+                <span class="mm-node">cash &amp; card</span>
+              </div>
+            </div>
+            <aside id="ex-side" class="cy-side" hidden></aside>
           </div>
         </div>
         <p class="example-disclaimer reveal d2">
@@ -388,5 +393,6 @@
 
     <script src="logo.js?v=8"></script>
     <script src="script.js?v=9"></script>
+    <script src="quiz.js?v=3"></script>
   </body>
 </html>
