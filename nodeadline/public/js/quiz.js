@@ -1,7 +1,9 @@
-/* nodeadline — quiz → mini-map (TZ §6).
-   Vanilla. No build. Loads quiz.json + rules.json, runs a showIf state machine
-   (mouse/tap only, no contact asked before the result), generates a map with a
-   declarative rules engine, and renders it with Cytoscape.js (lazy-loaded). */
+/* nodeadline — quiz → mini-map.
+   Vanilla. Loads quiz.json + rules.json (from /assets), runs a showIf state
+   machine (mouse/tap only, no contact asked before the result), generates a map
+   with a declarative rules engine, and renders it with Cytoscape.js. On the
+   result, the visitor can drop their email → creates an ERPNext Lead with their
+   answers + map (via window.NDL.submitLead). Served at /assets/nodeadline/js/quiz.js */
 (function () {
   "use strict";
 
@@ -9,12 +11,11 @@
   var EXAMPLE = document.getElementById("cy-example");
   if (!MOUNT && !EXAMPLE) return;
 
-  var CYTO_URL = "https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js";
+  var ASSET = "/assets/nodeadline";
+  var CYTO_URL = "https://unpkg.com/cytoscape@3.30.2/dist/cytoscape.min.js"; // CDN fallback only
   var STORE_KEY = "ndl_quiz_v1";
-  var START_HREF =
-    "mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Send%20me%20my%20real%20map";
 
-  // node type → colour (matches the home.css syntax palette)
+  // node type → colour (matches the nodeadline.css syntax palette)
   var TYPE_COLOR = {
     people: "#0550ae", materials: "#1b7c83", tools: "#bc4c00",
     money: "#1a7f37", documents: "#8250df", external: "#cf222e"
@@ -44,7 +45,7 @@
     });
   }
 
-  // ---------- lazy Cytoscape ----------
+  // ---------- lazy Cytoscape (vendored first, CDN fallback) ----------
   var cytoPromise = null;
   function ensureCytoscape() {
     if (window.cytoscape) return Promise.resolve(window.cytoscape);
@@ -257,7 +258,7 @@
       head.appendChild(el("span", "quiz-step", "step " + (idx + 1) + " / " + list.length));
       var bar = el("div", "quiz-bar");
       var fill = el("span", "quiz-bar-fill");
-      fill.style.width = Math.round(((idx) / list.length) * 100) + "%";
+      fill.style.width = Math.round((idx / list.length) * 100) + "%";
       bar.appendChild(fill);
       head.appendChild(bar);
       MOUNT.appendChild(head);
@@ -332,7 +333,6 @@
 
       MOUNT.appendChild(el("p", "cy-tip", "Tap any node to see what it does and where it hands off. Solid = flow · dashed = where money changes hands."));
 
-      // surfaced highlight hint, if any
       var hinted = map.nodes.filter(function (n) { return n.hint && n.hint.text; })[0];
       if (hinted) {
         MOUNT.appendChild(el("p", "cy-win",
@@ -343,10 +343,11 @@
         "This is a generic template for a <span class='tk-ty'>" + esc(bizLabel) +
         "</span>. Your real business looks different — <strong>that's the whole point.</strong>"));
 
+      // ----- lead capture: send the real map -----
+      var leadWrap = buildLeadForm(answers, map, bizLabel);
+      MOUNT.appendChild(leadWrap);
+
       var actions = el("div", "cta-row quiz-actions");
-      var start = el("a", "btn primary", "Send me my real map");
-      start.href = START_HREF;
-      actions.appendChild(start);
       var redo = el("button", "btn ghost", "Start over");
       redo.type = "button";
       redo.addEventListener("click", function () {
@@ -361,6 +362,79 @@
       renderMap(cy, map, function (d) { sidePanel(side, d, map); });
     }
 
+    // build the "send me my real map" lead form (creates an ERPNext Lead)
+    function buildLeadForm(answers, map, bizLabel) {
+      var wrap = el("div", "quiz-lead");
+      wrap.appendChild(el("h4", null, "Want this drawn for real?"));
+      wrap.appendChild(el("p", "quiz-lead-sub",
+        "Leave your email and we'll send your actual map within a week. No charge to see it."));
+
+      var form = document.createElement("form");
+      form.className = "lead-form";
+      form.setAttribute("novalidate", "");
+      form.innerHTML =
+        '<input class="lead-input" type="email" name="email" required ' +
+        'placeholder="you@business.ie" autocomplete="email" inputmode="email" aria-label="Your email" />' +
+        '<input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />' +
+        '<button class="btn primary" type="submit">Send me my real map</button>' +
+        '<p class="lead-status" data-lead-status hidden></p>';
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var status = form.querySelector("[data-lead-status]");
+        var btn = form.querySelector('button[type="submit"]');
+        var emailEl = form.querySelector('input[name="email"]');
+        var email = emailEl ? String(emailEl.value || "").trim() : "";
+        if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+          setStatus(status, "Please enter a valid email.", "is-err");
+          emailEl && emailEl.focus();
+          return;
+        }
+        if (!window.NDL || !window.NDL.submitLead) {
+          setStatus(status, "Email nikolai@riabets.com and we'll send your map.", "is-err");
+          return;
+        }
+        var payload = {
+          email: email,
+          cta: "quiz",
+          website: (form.querySelector('input[name="website"]') || {}).value || "",
+          quiz: {
+            business: bizLabel,
+            answers: answers,
+            map: {
+              nodes: map.nodes.map(function (n) {
+                return { id: n.id, label: n.label, type: n.type, highlight: !!n.highlight };
+              }),
+              edges: map.edges.map(function (ed) {
+                return { from: ed.source, to: ed.target, kind: ed.kind, label: ed.label || "" };
+              })
+            }
+          }
+        };
+        var label = btn ? btn.textContent : "";
+        if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+        if (status) status.hidden = true;
+        window.NDL.submitLead(payload).then(function () {
+          form.reset();
+          setStatus(status, "On its way — we'll email your real map to " + email + ".", "is-ok");
+        }).catch(function (err) {
+          setStatus(status, (err && err.message) || "Something went wrong.", "is-err");
+        }).then(function () {
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+        });
+      });
+
+      wrap.appendChild(form);
+      return wrap;
+    }
+
+    function setStatus(elm, msg, cls) {
+      if (!elm) return;
+      elm.textContent = msg;
+      elm.className = "lead-status " + (cls || "");
+      elm.hidden = false;
+    }
+
     // resume to the first unanswered visible question (or the result if complete)
     var list0 = visible();
     idx = answers.biz_type != null ? firstUnanswered(list0) : 0;
@@ -368,13 +442,24 @@
   }
 
   // ---------- boot ----------
-  Promise.all([loadJSON("quiz.json?v=1"), loadJSON("rules.json?v=1")])
-    .then(function (res) {
-      var quiz = res[0], rules = res[1];
-      startQuiz(quiz, rules);
-      mountExample(rules);
-    })
-    .catch(function () {
-      /* leave the static placeholder / fallback in place on failure */
+  function boot() {
+    return Promise.all([
+      loadJSON(ASSET + "/data/quiz.json?v=1"),
+      loadJSON(ASSET + "/data/rules.json?v=1")
+    ]).then(function (res) {
+      startQuiz(res[0], res[1]);
+      mountExample(res[1]);
     });
+  }
+
+  boot().catch(function () {
+    // leave the static placeholder; let its button retry on demand
+    var startBtn = document.querySelector("[data-quiz-start]");
+    if (startBtn) {
+      startBtn.addEventListener("click", function () {
+        startBtn.disabled = true;
+        boot().catch(function () { startBtn.disabled = false; });
+      });
+    }
+  });
 })();

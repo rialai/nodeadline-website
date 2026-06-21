@@ -6,27 +6,35 @@
     <title>Nodeadline | See your whole business on one page</title>
     <meta
       name="description"
-      content="Stop running your business from your head. We map how it actually works — drawn for you in 12 clicks — then run it on a real system. Nothing is built or billed until you say 'that's my business.' Start from €1/day."
+      content="Stop running your business from your head. We map how it actually works — drawn for you in 12 clicks — then run it on a real ERP. Nothing is built or billed until you say 'that's my business.' Start from €1/day."
     />
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- CSRF token for the Guest lead form (rendered per request by index.py) -->
+    <meta name="frappe-csrf-token" content="{{ csrf_token }}" />
+
+    <!-- OpenGraph (base template is bypassed on a standalone page, so set here) -->
     <meta property="og:title" content="Nodeadline — see your whole business on one page" />
     <meta
       property="og:description"
-      content="We map how your business actually works, then run it on a real system. Nothing is built or billed until you confirm the map. The map is yours to keep."
+      content="We map how your business actually works, then run it on a real ERP. Nothing is built or billed until you confirm the map. The map is yours to keep."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://nodeadline.ie" />
+    <link rel="canonical" href="https://nodeadline.ie/" />
+
+    <link rel="icon" type="image/svg+xml" href="/assets/nodeadline/images/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="home.css?v=10" />
-    <link rel="stylesheet" href="pay.css?v=9" />
+    <link rel="stylesheet" href="/assets/nodeadline/css/nodeadline.css?v=1" />
   </head>
   <body>
     <header class="topbar wrap">
-      <span class="brand matrix">nodeadline.ie</span>
+      <a class="brand matrix" href="/">nodeadline.ie</a>
       <nav class="nav">
         <a href="#map">the map</a>
         <a href="#stack">what we run</a>
@@ -36,7 +44,7 @@
     </header>
 
     <main>
-      <!-- ===== Hero (rewrite §3.1) — concrete result + zero risk ===== -->
+      <!-- ===== Hero — concrete result + zero risk ===== -->
       <section class="hero wrap">
         <p class="kicker reveal">for owners of small &amp; micro businesses · Dublin, Ireland</p>
         <h1 class="title reveal d1">
@@ -44,7 +52,7 @@
         </h1>
         <p class="subtitle reveal d2">
           Stop running it from your head. We map how your business actually works,
-          then run it on a real system. <strong>Start from €1/day.</strong>
+          then run it on a real ERP. <strong>Start from €1/day.</strong>
         </p>
         <p class="safety-banner reveal d3">
           Risk-free: nothing is built or billed until you look at the map and say
@@ -56,7 +64,7 @@
         </div>
       </section>
 
-      <!-- ===== In 30 seconds (§5.2) — one click for those who won't read ===== -->
+      <!-- ===== In 30 seconds ===== -->
       <section class="thirty wrap reveal">
         <div class="thirty-cell">
           <span class="thirty-tag">the pain</span>
@@ -78,7 +86,7 @@
         </div>
       </section>
 
-      <!-- ===== The problem (§3.2 + shift §3.3) ===== -->
+      <!-- ===== The problem ===== -->
       <section id="problem" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">01</span>
@@ -95,7 +103,7 @@
         </p>
       </section>
 
-      <!-- ===== The map / quiz (§6 — flagship). Engine mounts into #quiz-mount ===== -->
+      <!-- ===== The map / quiz (flagship). Engine mounts into #quiz-mount ===== -->
       <section id="map" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">02</span>
@@ -111,7 +119,7 @@
           <div class="quiz-ph">
             <span class="quiz-ph-tag">// interactive builder</span>
             <p class="quiz-ph-lead">12 taps → your business, drawn on one page.</p>
-            <a class="btn primary" href="#start">Draw my business</a>
+            <button class="btn primary" type="button" data-quiz-start>Draw my business</button>
             <p class="quiz-ph-note">Mouse or thumb only — about 90 seconds. We never ask who you are until you've seen the map.</p>
           </div>
         </div>
@@ -122,7 +130,7 @@
         </p>
       </section>
 
-      <!-- ===== Example map (§5.4) — café template (interactive next) ===== -->
+      <!-- ===== Example map — café template (interactive) ===== -->
       <section id="example" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">03</span>
@@ -152,7 +160,7 @@
         </p>
       </section>
 
-      <!-- ===== How it works (§5.5 — honest about timing) ===== -->
+      <!-- ===== How it works ===== -->
       <section id="how" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">04</span>
@@ -171,7 +179,7 @@
         </p>
       </section>
 
-      <!-- ===== Everything it runs / ERP (KEEP — moved BEFORE Costs per §4) ===== -->
+      <!-- ===== Everything it runs / ERPNext ===== -->
       <section id="stack" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">05</span>
@@ -185,58 +193,28 @@
         </p>
 
         <div class="stack reveal d1">
-          <article class="mod">
-            <h3>Accounting</h3>
-            <p>General ledger, AP/AR, multi-currency, financial statements, fixed assets, tax &amp; compliance.</p>
-          </article>
-          <article class="mod">
-            <h3>Selling</h3>
-            <p>Order-to-cash, sales orders, invoicing, pricing rules, payments.</p>
-          </article>
-          <article class="mod">
-            <h3>Buying</h3>
-            <p>Procure-to-pay, material requests, purchase orders, multi-level approvals, supplier scorecards.</p>
-          </article>
-          <article class="mod">
-            <h3>Stock</h3>
-            <p>Item master, warehouses, serial &amp; batch tracking, stock ledger, inventory reports.</p>
-          </article>
-          <article class="mod">
-            <h3>Manufacturing</h3>
-            <p>Multi-level BOM, production planning, work orders, job cards, subcontracting, quality checks.</p>
-          </article>
-          <article class="mod">
-            <h3>CRM</h3>
-            <p>Leads, opportunities, quotations, multi-territory sales, SLAs, newsletters.</p>
-          </article>
-          <article class="mod">
-            <h3>Projects</h3>
-            <p>Tasks, timesheets, expense tracking, revenue recognition, cash flow.</p>
-          </article>
-          <article class="mod">
-            <h3>Point of Sale</h3>
-            <p>Cloud POS, multi-store, shift management, profiles, invoicing &amp; collections.</p>
-          </article>
-          <article class="mod">
-            <h3>Quality</h3>
-            <p>QA plans, inspections, templates, non-conformance, quality analytics.</p>
-          </article>
-          <article class="mod">
-            <h3>Helpdesk</h3>
-            <p>Tickets, auto-assign rules, SLAs, customer portal, knowledge base, maintenance visits.</p>
-          </article>
-          <article class="mod">
-            <h3>HR &amp; Payroll</h3>
-            <p>People operations, attendance, leave, payroll processing.</p>
-          </article>
-          <article class="mod">
-            <h3>Assets</h3>
-            <p>Full asset lifecycle, depreciation, maintenance, disposal.</p>
-          </article>
+          <article class="mod"><h3>Accounting</h3><p>General ledger, AP/AR, multi-currency, financial statements, fixed assets, tax &amp; compliance.</p></article>
+          <article class="mod"><h3>Selling</h3><p>Order-to-cash, sales orders, invoicing, pricing rules, payments.</p></article>
+          <article class="mod"><h3>Buying</h3><p>Procure-to-pay, material requests, purchase orders, multi-level approvals, supplier scorecards.</p></article>
+          <article class="mod"><h3>Stock</h3><p>Item master, warehouses, serial &amp; batch tracking, stock ledger, inventory reports.</p></article>
+          <article class="mod"><h3>Manufacturing</h3><p>Multi-level BOM, production planning, work orders, job cards, subcontracting, quality checks.</p></article>
+          <article class="mod"><h3>CRM</h3><p>Leads, opportunities, quotations, multi-territory sales, SLAs, newsletters.</p></article>
+          <article class="mod"><h3>Projects</h3><p>Tasks, timesheets, expense tracking, revenue recognition, cash flow.</p></article>
+          <article class="mod"><h3>Point of Sale</h3><p>Cloud POS, multi-store, shift management, profiles, invoicing &amp; collections.</p></article>
+          <article class="mod"><h3>Quality</h3><p>QA plans, inspections, templates, non-conformance, quality analytics.</p></article>
+          <article class="mod"><h3>Helpdesk</h3><p>Tickets, auto-assign rules, SLAs, customer portal, knowledge base, maintenance visits.</p></article>
+          <article class="mod"><h3>HR &amp; Payroll</h3><p>People operations, attendance, leave, payroll processing.</p></article>
+          <article class="mod"><h3>Assets</h3><p>Full asset lifecycle, depreciation, maintenance, disposal.</p></article>
         </div>
+
+        <p class="dogfood reveal d2">
+          <strong>We eat our own cooking.</strong> The page you're reading runs on the same engine —
+          it's served straight out of <code>ERPNext</code>, and this form drops a lead into the very CRM we'd set up for you.
+          If we wouldn't run our own business on it, we wouldn't put it under yours.
+        </p>
       </section>
 
-      <!-- ===== Costs / commission slider + gated checkout (KEEP — now AFTER ERP) ===== -->
+      <!-- ===== Costs / commission + lead form ===== -->
       <section id="offer" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">06</span>
@@ -260,7 +238,7 @@
             </ul>
           </article>
 
-          <aside class="pay-card" aria-label="Payment">
+          <aside class="pay-card" aria-label="Set your commission and request access">
             <p class="price-label">Set your commission</p>
             <div class="comm-glass" role="tablist" aria-label="Commission level">
               <span class="thumb" aria-hidden="true"></span>
@@ -281,20 +259,23 @@
               We then take just <span class="tk-n">1%</span> of the revenue we can prove over the
               same <span class="tk-n">12</span> months, tracked in your <span class="tk-ty">ERP</span>.
             </p>
-            <a
-              class="btn primary pay-btn"
-              data-pay
-              href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%203650%20(1%25)"
-              rel="noopener"
-            >
-              Start at €3,650 — request access
-            </a>
-            <p class="secure-note" data-secure hidden>Card payment is processed securely by Stripe.</p>
+
+            <form class="lead-form" data-lead-form data-cta="request-access" novalidate>
+              <label class="visually-hidden" for="offer-email">Your email</label>
+              <input class="lead-input" id="offer-email" type="email" name="email" required
+                     placeholder="you@business.ie" autocomplete="email" inputmode="email" />
+              <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+              <button class="btn primary" type="submit" data-lead-submit>Request access</button>
+              <p class="lead-status" data-lead-status hidden></p>
+              <p class="lead-consent">
+                We'll only use this to talk to you about your map. No spam, no list.
+              </p>
+            </form>
           </aside>
         </div>
       </section>
 
-      <!-- ===== How we get paid (softened per §9 — honest ladder, no aggression) ===== -->
+      <!-- ===== How we get paid (honest ladder) ===== -->
       <section class="section wrap">
         <div class="deal reveal">
           <h2>How we get paid</h2>
@@ -315,7 +296,7 @@
         </div>
       </section>
 
-      <!-- ===== The environment / network teaser (§3a) ===== -->
+      <!-- ===== Network teaser ===== -->
       <section id="network" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">07</span>
@@ -328,7 +309,7 @@
         </p>
       </section>
 
-      <!-- ===== FAQ / objections (§10) ===== -->
+      <!-- ===== FAQ / objections ===== -->
       <section id="faq" class="section wrap">
         <div class="section-head reveal">
           <span class="section-num">08</span>
@@ -365,34 +346,59 @@
           </details>
           <details>
             <summary>Is my data safe?</summary>
-            <p>Your data stays yours. We use EU-based tools, name our data controller in the privacy notice, and never sell anything.</p>
+            <p>Your data stays yours. We run on EU-based infrastructure, name our data controller in the privacy notice, and never sell anything.</p>
           </details>
         </div>
       </section>
 
-      <!-- ===== Start / direct CTA (§5.7 — "сразу продаём": straight to the ask) ===== -->
+      <!-- ===== Start / direct CTA ===== -->
       <section id="start" class="section wrap">
         <div class="start-block reveal">
           <h2>Ready? Start at <span class="tk-n">€1/day</span>.</h2>
           <p>
             Nothing is built or billed until you've seen your map and said it's right.
-            We set you up directly while we finalise our terms.
+            Leave your details and we'll set you up directly.
           </p>
-          <div class="cta-row">
-            <a class="btn primary" href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Start%20at%20365%20(10%25)">Start — request access</a>
-            <a class="btn ghost" href="mailto:nikolai@riabets.com?subject=Nodeadline%20%E2%80%94%20Book%20a%2020-min%20call">Book a 20-min call</a>
-          </div>
+          <form class="lead-form" data-lead-form data-cta="contact" novalidate>
+            <div class="field-row">
+              <div>
+                <label class="visually-hidden" for="start-name">Your name</label>
+                <input class="lead-input" id="start-name" type="text" name="name"
+                       placeholder="Your name" autocomplete="name" />
+              </div>
+              <div>
+                <label class="visually-hidden" for="start-company">Business name</label>
+                <input class="lead-input" id="start-company" type="text" name="company"
+                       placeholder="Business name (optional)" autocomplete="organization" />
+              </div>
+            </div>
+            <label class="visually-hidden" for="start-email">Your email</label>
+            <input class="lead-input" id="start-email" type="email" name="email" required
+                   placeholder="you@business.ie" autocomplete="email" inputmode="email" />
+            <label class="visually-hidden" for="start-message">Anything we should know?</label>
+            <textarea class="lead-input" id="start-message" name="message"
+                      placeholder="What do you run? Anything we should know? (optional)"></textarea>
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <button class="btn primary" type="submit" data-lead-submit>Start — request access</button>
+            <p class="lead-status" data-lead-status hidden></p>
+            <p class="lead-consent">
+              Prefer to talk first? Email <a href="mailto:nikolai@riabets.com">nikolai@riabets.com</a> for a 20-min call.
+            </p>
+          </form>
         </div>
       </section>
     </main>
 
     <footer class="footer wrap">
-      <span>© <span id="year"></span> Nodeadline. Dublin, Ireland.</span>
+      <span>© {{ year }} Nodeadline. Dublin, Ireland.</span>
+      <span class="built">runs on <span class="tk-ty">ERPNext</span> · Frappe</span>
       <a href="mailto:nikolai@riabets.com">nikolai@riabets.com</a>
     </footer>
 
-    <script src="logo.js?v=8"></script>
-    <script src="script.js?v=9"></script>
-    <script src="quiz.js?v=3"></script>
+    <!-- Vendored Cytoscape first (CDN fallback handled inside quiz.js), then app JS -->
+    <script src="/assets/nodeadline/js/cytoscape.min.js?v=1"></script>
+    <script src="/assets/nodeadline/js/logo.js?v=1"></script>
+    <script src="/assets/nodeadline/js/site.js?v=1"></script>
+    <script src="/assets/nodeadline/js/quiz.js?v=1"></script>
   </body>
 </html>
