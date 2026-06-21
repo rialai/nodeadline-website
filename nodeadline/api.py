@@ -27,10 +27,15 @@ CTA_LABELS = {
 }
 
 
-# NB: the decorator lives in frappe.rate_limiter — `frappe.rate_limit` does not
-# exist as a top-level attribute (confirmed on Frappe v16), so import it directly.
-@rate_limit(key="email", limit=6, seconds=60 * 60, ip_based=True)
+# Decorator notes (both confirmed against Frappe v16 by live testing):
+#  - `frappe.rate_limit` is NOT a top-level attribute — import rate_limit from
+#    frappe.rate_limiter.
+#  - @frappe.whitelist must be the OUTERMOST decorator. rate_limit returns a
+#    wrapper; if whitelist sits below it, the registered/whitelisted callable is
+#    the inner one and guests hit "not whitelisted" (403). whitelist on top
+#    registers the rate-limited wrapper, and rate limiting still applies.
 @frappe.whitelist(allow_guest=True)
+@rate_limit(key="email", limit=6, seconds=60 * 60, ip_based=True)
 def create_lead(
 	name=None,
 	email=None,
