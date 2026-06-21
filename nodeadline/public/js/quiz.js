@@ -311,11 +311,12 @@
     function complete() {
       save();
       var map = buildMap(answers, rules);
-      var bizLabel = (function () {
-        var q0 = questions[0];
-        var o = q0.options.filter(function (x) { return x.value === answers.biz_type; })[0];
-        return o ? o.label : "your business";
-      })();
+      var BIZ_PHRASE = {
+        cafe: "a café", auto: "an auto-service shop", production: "a workshop",
+        trades: "a tradesman's business", services: "a service business",
+        retail: "a shop", other: "a business like yours"
+      };
+      var bizPhrase = BIZ_PHRASE[answers.biz_type] || "a business like yours";
 
       MOUNT.classList.add("quiz-live", "quiz-result");
       MOUNT.innerHTML = "";
@@ -340,7 +341,7 @@
       }
 
       MOUNT.appendChild(el("p", "example-disclaimer",
-        "This is a generic template for a <span class='tk-ty'>" + esc(bizLabel) +
+        "This is a generic template for <span class='tk-ty'>" + esc(bizPhrase) +
         "</span>. Your real business looks different — <strong>that's the whole point.</strong>"));
 
       // ----- lead capture: send the real map -----

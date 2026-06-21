@@ -11,6 +11,7 @@ import json
 
 import frappe
 from frappe import _
+from frappe.rate_limiter import rate_limit
 from frappe.utils import escape_html, strip_html_tags, validate_email_address
 
 # Fixed Lead Source for inbound website leads. ERPNext ships a "Website" source;
@@ -26,7 +27,9 @@ CTA_LABELS = {
 }
 
 
-@frappe.rate_limit(key="email", limit=6, seconds=60 * 60, ip_based=True)
+# NB: the decorator lives in frappe.rate_limiter — `frappe.rate_limit` does not
+# exist as a top-level attribute (confirmed on Frappe v16), so import it directly.
+@rate_limit(key="email", limit=6, seconds=60 * 60, ip_based=True)
 @frappe.whitelist(allow_guest=True)
 def create_lead(
 	name=None,
