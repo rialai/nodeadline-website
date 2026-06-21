@@ -1,5 +1,5 @@
 {
-  "_note": "Declarative map generation (TZ §6.2/§6.3). Engine: pick skeleton by biz_type (else _generic), apply rules whose `when` matches the answers, enforce invariants (8–15 nodes, >=1 highlight). Node types: people|materials|tools|money|documents|external. Edge kinds: flow|transaction. OWNER: skeletons exist for cafe + auto + generic (§14 'at least 2 types'); production/trades/services/retail currently use _generic — extendable here.",
+  "_note": "Declarative map generation. Engine: pick skeleton by biz_type (else _generic), apply rules whose `when` matches the answers, enforce invariants (8–15 nodes, >=1 highlight). Node types: people|materials|tools|money|documents|external. Edge kinds: flow|transaction. Skeletons exist for cafe, auto, trades, services, retail, production + _generic. Hub ids the rules attach to: owner, suppliers, jobs/work/counter/customers, money, inputs, and a people node among staff/mechanics/team.",
 
   "skeletons": {
     "cafe": {
@@ -50,6 +50,114 @@
       ]
     },
 
+    "trades": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Quotes, buys, books", "On the tools too"] },
+        { "id": "team", "type": "people", "label": "Crew / mate", "functions": ["On site, on the tools"] },
+        { "id": "suppliers", "type": "external", "label": "Merchants", "functions": ["Materials, parts, hire"] },
+        { "id": "materials", "type": "materials", "label": "Materials", "functions": ["Stock for jobs"] },
+        { "id": "van", "type": "tools", "label": "Van", "functions": ["Tools + stock on wheels"] },
+        { "id": "quotes", "type": "documents", "label": "Quotes", "functions": ["Price before the job"] },
+        { "id": "jobs", "type": "documents", "label": "Jobs", "functions": ["Who, what, when"] },
+        { "id": "site", "type": "tools", "label": "Site", "functions": ["Where the work happens"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Book, approve, pay"] },
+        { "id": "invoices", "type": "documents", "label": "Invoices", "functions": ["Bill after the job"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "owner", "target": "quotes", "kind": "flow", "label": "price up" },
+        { "source": "quotes", "target": "customers", "kind": "flow", "label": "send" },
+        { "source": "customers", "target": "jobs", "kind": "flow", "label": "approve" },
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "order" },
+        { "source": "suppliers", "target": "materials", "kind": "transaction", "label": "deliver" },
+        { "source": "materials", "target": "jobs", "kind": "flow", "label": "used on" },
+        { "source": "team", "target": "site", "kind": "flow", "label": "on the tools" },
+        { "source": "van", "target": "site", "kind": "flow", "label": "carry kit" },
+        { "source": "jobs", "target": "site", "kind": "flow", "label": "scheduled" },
+        { "source": "site", "target": "invoices", "kind": "flow", "label": "job done" },
+        { "source": "invoices", "target": "customers", "kind": "flow", "label": "bill" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "team", "kind": "flow", "label": "manage" }
+      ]
+    },
+
+    "services": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Wins work, runs it"] },
+        { "id": "team", "type": "people", "label": "Team", "functions": ["Do the work"] },
+        { "id": "suppliers", "type": "external", "label": "Suppliers / subs", "functions": ["Outsourced bits"] },
+        { "id": "leads", "type": "documents", "label": "Leads", "functions": ["Enquiries coming in"] },
+        { "id": "proposals", "type": "documents", "label": "Proposals", "functions": ["Scope & price"] },
+        { "id": "work", "type": "tools", "label": "Projects", "functions": ["Where value is made"] },
+        { "id": "customers", "type": "external", "label": "Clients", "functions": ["Brief, approve, pay"] },
+        { "id": "invoices", "type": "documents", "label": "Invoices", "functions": ["Bill the work"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "leads", "target": "proposals", "kind": "flow", "label": "qualify" },
+        { "source": "owner", "target": "proposals", "kind": "flow", "label": "write" },
+        { "source": "proposals", "target": "customers", "kind": "flow", "label": "send" },
+        { "source": "customers", "target": "work", "kind": "flow", "label": "win, start" },
+        { "source": "team", "target": "work", "kind": "flow", "label": "deliver" },
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "engage" },
+        { "source": "suppliers", "target": "work", "kind": "flow", "label": "support" },
+        { "source": "work", "target": "invoices", "kind": "flow", "label": "milestone" },
+        { "source": "invoices", "target": "customers", "kind": "flow", "label": "bill" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "team", "kind": "flow", "label": "manage" }
+      ]
+    },
+
+    "retail": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Buys, prices, hires"] },
+        { "id": "staff", "type": "people", "label": "Staff", "functions": ["Run the floor & till"] },
+        { "id": "suppliers", "type": "external", "label": "Suppliers", "functions": ["Supply stock"] },
+        { "id": "inputs", "type": "materials", "label": "Stock", "functions": ["What you sell"] },
+        { "id": "shop", "type": "tools", "label": "Shop floor", "functions": ["Where it's sold"] },
+        { "id": "counter", "type": "tools", "label": "Till / POS", "functions": ["Take payment"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Browse, buy, pay"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "order" },
+        { "source": "suppliers", "target": "inputs", "kind": "transaction", "label": "deliver" },
+        { "source": "inputs", "target": "shop", "kind": "flow", "label": "shelve" },
+        { "source": "staff", "target": "shop", "kind": "flow", "label": "run floor" },
+        { "source": "staff", "target": "counter", "kind": "flow", "label": "serve" },
+        { "source": "shop", "target": "customers", "kind": "flow", "label": "browse" },
+        { "source": "customers", "target": "counter", "kind": "flow", "label": "checkout" },
+        { "source": "counter", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "staff", "kind": "flow", "label": "manage" }
+      ]
+    },
+
+    "production": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Quotes, buys, plans"] },
+        { "id": "team", "type": "people", "label": "Team", "functions": ["Make the goods"] },
+        { "id": "suppliers", "type": "external", "label": "Suppliers", "functions": ["Supply raw materials"] },
+        { "id": "inputs", "type": "materials", "label": "Raw materials", "functions": ["What goods are made from"] },
+        { "id": "work", "type": "tools", "label": "Machines", "functions": ["Where it's made"] },
+        { "id": "orders", "type": "documents", "label": "Orders", "functions": ["What to make, for whom"] },
+        { "id": "finished", "type": "materials", "label": "Finished goods", "functions": ["Ready to ship"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Order, receive, pay"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "customers", "target": "orders", "kind": "flow", "label": "order" },
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "buy" },
+        { "source": "suppliers", "target": "inputs", "kind": "transaction", "label": "deliver" },
+        { "source": "inputs", "target": "work", "kind": "flow", "label": "into" },
+        { "source": "team", "target": "work", "kind": "flow", "label": "make" },
+        { "source": "orders", "target": "work", "kind": "flow", "label": "schedule" },
+        { "source": "work", "target": "finished", "kind": "flow", "label": "produce" },
+        { "source": "finished", "target": "customers", "kind": "flow", "label": "ship" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "team", "kind": "flow", "label": "manage" }
+      ]
+    },
+
     "_generic": {
       "nodes": [
         { "id": "owner", "type": "people", "label": "Owner", "functions": ["Runs it", "Buys, sells, hires"] },
@@ -93,25 +201,60 @@
       "addNode": { "id": "online", "type": "external", "label": "Online shop", "functions": ["Sell beyond the door"] },
       "addEdges": [ { "from": "online", "to": "money", "kind": "transaction", "label": "sales" }, { "from_hub": ["inputs", "work"], "to": "online", "kind": "flow", "label": "ship" } ] },
 
+    { "when": { "trades_quote": "yes" },
+      "hint": { "node": ["quotes", "jobs", "owner"], "type": "automate", "text": "Turn quotes into jobs into invoices in one tap — nothing falls through the cracks." } },
+
     { "when": { "pain": "suppliers" }, "highlightNode": "suppliers",
-      "hint": { "node": "suppliers", "type": "automate", "text": "Auto-compare supplier prices — buy the cheapest, every time." } },
+      "hint": { "node": "suppliers", "type": "automate", "text": "Auto-compare merchant prices — buy the cheapest, every time." } },
 
     { "when": { "pain": "staff" }, "highlightNode": ["staff", "mechanics", "team"],
       "hint": { "node": ["staff", "mechanics", "team"], "type": "save", "text": "Spare-staff cover with task cards when someone's out." } },
 
     { "when": { "pain": "cashflow" }, "highlightNode": "money",
-      "hint": { "node": "money", "type": "automate", "text": "See cash in and out before it bites." } },
+      "hint": { "node": "money", "type": "automate", "text": "See cash in and out before it bites — chase invoices automatically." } },
 
     { "when": { "pain": "time" }, "highlightNode": "owner",
-      "hint": { "node": "owner", "type": "save", "text": "Take the daily admin off your plate." } },
+      "hint": { "node": "owner", "type": "save", "text": "Take the daily admin — quotes, orders, invoices — off your plate." } },
 
     { "when": { "pain": "chaos" }, "highlightNode": "owner",
-      "hint": { "node": "owner", "type": "automate", "text": "One clear picture instead of ten chats." } }
+      "hint": { "node": "owner", "type": "automate", "text": "One clear picture instead of ten chats and a notebook." } }
   ],
 
   "defaultHighlight": "suppliers",
 
   "examples": {
+    "trades": {
+      "nodes": [
+        { "id": "owner", "type": "people", "label": "Owner", "functions": ["Quotes, buys, books", "On the tools too"] },
+        { "id": "team", "type": "people", "label": "Mate / apprentice", "functions": ["On site, on the tools"] },
+        { "id": "suppliers", "type": "external", "label": "Wholesaler", "functions": ["Cable, parts, fittings"] },
+        { "id": "materials", "type": "materials", "label": "Materials", "functions": ["Stock for jobs"] },
+        { "id": "van", "type": "tools", "label": "Van", "functions": ["Tools + stock on wheels"] },
+        { "id": "quotes", "type": "documents", "label": "Quotes", "functions": ["Price before the job"] },
+        { "id": "jobs", "type": "documents", "label": "Jobs", "functions": ["Who, what, when"] },
+        { "id": "site", "type": "tools", "label": "Site", "functions": ["Customer's home / unit"] },
+        { "id": "customers", "type": "external", "label": "Customers", "functions": ["Book, approve, pay"] },
+        { "id": "invoices", "type": "documents", "label": "Invoices", "functions": ["Bill after the job"] },
+        { "id": "money", "type": "money", "label": "Cash & card", "functions": ["Money in"] }
+      ],
+      "edges": [
+        { "source": "owner", "target": "quotes", "kind": "flow", "label": "price up" },
+        { "source": "quotes", "target": "customers", "kind": "flow", "label": "send quote" },
+        { "source": "customers", "target": "jobs", "kind": "flow", "label": "approve" },
+        { "source": "owner", "target": "suppliers", "kind": "transaction", "label": "order", "highlight": true },
+        { "source": "suppliers", "target": "materials", "kind": "transaction", "label": "deliver", "highlight": true },
+        { "source": "materials", "target": "jobs", "kind": "flow", "label": "used on" },
+        { "source": "team", "target": "site", "kind": "flow", "label": "on the tools" },
+        { "source": "van", "target": "site", "kind": "flow", "label": "carry kit" },
+        { "source": "jobs", "target": "site", "kind": "flow", "label": "scheduled" },
+        { "source": "site", "target": "invoices", "kind": "flow", "label": "job done" },
+        { "source": "invoices", "target": "customers", "kind": "flow", "label": "bill" },
+        { "source": "customers", "target": "money", "kind": "transaction", "label": "pay" },
+        { "source": "owner", "target": "team", "kind": "flow", "label": "manage" }
+      ],
+      "highlightNode": "suppliers"
+    },
+
     "cafe": {
       "nodes": [
         { "id": "owner", "type": "people", "label": "Owner", "functions": ["Runs the place", "Buys, hires, fixes"] },

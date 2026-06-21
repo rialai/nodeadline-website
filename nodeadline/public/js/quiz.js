@@ -178,8 +178,8 @@
 
   // ---------- example map (café) in the #example section ----------
   function mountExample(rules) {
-    if (!EXAMPLE || !rules.examples || !rules.examples.cafe) return;
-    var ex = rules.examples.cafe;
+    var ex = rules.examples && (rules.examples.trades || rules.examples.cafe);
+    if (!EXAMPLE || !ex) return;
     var map = { nodes: ex.nodes.map(function (n) {
         return Object.assign({}, n, { highlight: n.id === ex.highlightNode });
       }), edges: ex.edges.slice() };
@@ -444,8 +444,8 @@
   // ---------- boot ----------
   function boot() {
     return Promise.all([
-      loadJSON(ASSET + "/data/quiz.json?v=1"),
-      loadJSON(ASSET + "/data/rules.json?v=1")
+      loadJSON(ASSET + "/data/quiz.json?v=2"),
+      loadJSON(ASSET + "/data/rules.json?v=2")
     ]).then(function (res) {
       startQuiz(res[0], res[1]);
       mountExample(res[1]);
