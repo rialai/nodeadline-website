@@ -93,10 +93,16 @@ def create_lead(
 		}
 	)
 
-	# `source` is a Link to "Lead Source" — only set it if the record exists,
-	# otherwise the insert would fail on a broken link.
-	if frappe.db.exists("Lead Source", WEBSITE_LEAD_SOURCE):
-		doc.source = WEBSITE_LEAD_SOURCE
+	# `source` is a Link to "Lead Source" — set it only if both the doctype and a
+	# matching record exist, fully guarded so a missing "Lead Source" never blocks
+	# the lead or leaks a server message into the response.
+	try:
+		if frappe.db.exists("DocType", "Lead Source") and frappe.db.exists(
+			"Lead Source", WEBSITE_LEAD_SOURCE
+		):
+			doc.source = WEBSITE_LEAD_SOURCE
+	except Exception:
+		pass
 
 	# Guest has no create permission on Lead, so ignore_permissions is required.
 	# Wrap in try/except so an unexpected validation/DB error returns a soft
