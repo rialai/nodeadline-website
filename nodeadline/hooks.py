@@ -19,16 +19,11 @@ home_page = "index"
 
 # Website context
 # ---------------
-# Applies to Frappe-rendered pages (login, error pages, etc.). The landing page
-# is a standalone HTML document and controls its own <head>, so this does not
-# affect it — it only gives the rest of the site a consistent favicon.
-website_context = {
-	"favicon": "/assets/nodeadline/images/favicon.svg",
-}
+# The landing page is a standalone "coming soon" placeholder that controls its
+# own <head>; no custom favicon/logo is shipped, so there is nothing to set here.
 
-# The landing page is fully self-contained (its own header/footer/CSS/JS), so we
-# deliberately do NOT use web_include_css / web_include_js — those would inject
-# assets into every portal page. Each www page links its own assets instead.
+# The placeholder page is fully self-contained (inline CSS, no JS), so we
+# deliberately do NOT use web_include_css / web_include_js.
 
 # Installation
 # ------------
